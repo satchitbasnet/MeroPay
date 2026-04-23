@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const app = express();
 const PORT = process.env.PORT || 3000;
 const prisma = new PrismaClient();
+const MAX_TRANSFER_AMOUNT = 1_000_000;
 
 app.use(cors({ origin: true }));
 app.use(express.json());
@@ -29,63 +30,121 @@ async function ensureSeedData() {
   }
 }
 
+class ApiError extends Error {
+  constructor(status, code, message, details = null) {
+    super(message);
+    this.status = status;
+    this.code = code;
+    this.details = details;
+  }
+}
+
+function sendApiError(res, status, code, message, details = null) {
+  return res.status(status).json({
+    success: false,
+    error: { code, message, details },
+  });
+}
+
+function normalizeUsername(rawValue) {
+  const raw = String(rawValue || "").trim().toLowerCase();
+  if (!raw) return "";
+  const withPrefix = raw.startsWith("@") ? raw : `@${raw}`;
+  return withPrefix;
+}
+
+function validateTransferPayload(body) {
+  if (!body || typeof body !== "object") {
+    throw new ApiError(400, "INVALID_BODY", "Request body must be a JSON object");
+  }
+
+  const senderId = String(body.senderId || "").trim();
+  const receiverUsername = normalizeUsername(body.receiverUsername);
+  const amount = Number(body.amount);
+
+  if (!senderId) {
+    throw new ApiError(400, "INVALID_SENDER_ID", "senderId is required");
+  }
+  if (senderId.length > 64) {
+    throw new ApiError(400, "INVALID_SENDER_ID", "senderId must be 64 characters or less");
+  }
+  if (!receiverUsername) {
+    throw new ApiError(400, "INVALID_RECEIVER_USERNAME", "receiverUsername is required");
+  }
+  if (!/^@[a-z0-9_]{3,32}$/i.test(receiverUsername)) {
+    throw new ApiError(
+      400,
+      "INVALID_RECEIVER_USERNAME",
+      "receiverUsername must be 3-32 characters and use letters, numbers, or underscores"
+    );
+  }
+  if (!Number.isFinite(amount) || !Number.isInteger(amount)) {
+    throw new ApiError(400, "INVALID_AMOUNT", "amount must be an integer");
+  }
+  if (amount <= 0) {
+    throw new ApiError(400, "INVALID_AMOUNT", "amount must be greater than 0");
+  }
+  if (amount > MAX_TRANSFER_AMOUNT) {
+    throw new ApiError(
+      400,
+      "INVALID_AMOUNT",
+      `amount must be less than or equal to ${MAX_TRANSFER_AMOUNT}`
+    );
+  }
+
+  return { senderId, receiverUsername, amount };
+}
+
 app.get("/api/health", async (_req, res) => {
-  const [usersCount, txCount] = await Promise.all([
-    prisma.user.count(),
-    prisma.transaction.count(),
-  ]);
-  res.json({ ok: true, users: usersCount, transactions: txCount });
+  try {
+    const [usersCount, txCount] = await Promise.all([
+      prisma.user.count(),
+      prisma.transaction.count(),
+    ]);
+    res.json({ ok: true, users: usersCount, transactions: txCount });
+  } catch (error) {
+    sendApiError(res, 500, "HEALTH_CHECK_FAILED", "Failed to query health state", {
+      reason: error?.message || "Unknown error",
+    });
+  }
 });
 
 app.post("/api/transfer", async (req, res) => {
-  const { senderId, receiverUsername, amount } = req.body || {};
-  const parsedAmount = Number(amount);
-
-  if (!senderId || !receiverUsername || !Number.isFinite(parsedAmount)) {
-    return res.status(400).json({
-      success: false,
-      message: "senderId, receiverUsername, and amount are required",
-    });
-  }
-  if (parsedAmount <= 0 || !Number.isInteger(parsedAmount)) {
-    return res.status(400).json({
-      success: false,
-      message: "Amount must be a positive integer",
-    });
-  }
-
   try {
+    const { senderId, receiverUsername, amount } = validateTransferPayload(req.body);
     const receipt = await prisma.$transaction(async (tx) => {
       const sender = await tx.user.findUnique({ where: { id: senderId } });
-      if (!sender) throw new Error("Sender not found");
+      if (!sender) throw new ApiError(404, "SENDER_NOT_FOUND", "Sender not found");
 
       const receiver = await tx.user.findFirst({
         where: {
           username: {
-            equals: receiverUsername.startsWith("@")
-              ? receiverUsername
-              : `@${receiverUsername}`,
+            equals: receiverUsername,
             mode: "insensitive",
           },
         },
       });
-      if (!receiver) throw new Error("Receiver not found");
-      if (sender.id === receiver.id) throw new Error("Cannot pay yourself");
-      if (sender.balance < parsedAmount) throw new Error("Insufficient funds");
+      if (!receiver) throw new ApiError(404, "RECEIVER_NOT_FOUND", "Receiver not found");
+      if (sender.id === receiver.id) {
+        throw new ApiError(400, "SELF_TRANSFER_BLOCKED", "Cannot transfer to your own account");
+      }
+      if (sender.balance < amount) {
+        throw new ApiError(409, "INSUFFICIENT_FUNDS", "Insufficient funds");
+      }
 
       const nextSender = await tx.user.update({
         where: { id: sender.id },
-        data: { balance: { decrement: parsedAmount } },
+        data: { balance: { decrement: amount } },
       });
       const nextReceiver = await tx.user.update({
         where: { id: receiver.id },
-        data: { balance: { increment: parsedAmount } },
+        data: { balance: { increment: amount } },
       });
 
       const ledger = await tx.transaction.create({
         data: {
           id: `txn_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-          amount: parsedAmount,
+          amount,
           senderId: sender.id,
           receiverId: receiver.id,
           status: "COMPLETED",
@@ -123,9 +182,11 @@ app.post("/api/transfer", async (req, res) => {
       balances: receipt.balances,
     });
   } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error?.message || "Transfer failed",
+    if (error instanceof ApiError) {
+      return sendApiError(res, error.status, error.code, error.message, error.details);
+    }
+    return sendApiError(res, 500, "TRANSFER_FAILED", "Transfer failed", {
+      reason: error?.message || "Unknown error",
     });
   }
 });

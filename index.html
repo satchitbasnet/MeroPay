@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Roboto",sans-serif;}
+button,input,textarea,select{font:inherit;-webkit-tap-highlight-color:transparent;}
+button{touch-action:manipulation;}
 :root{
   --font-display-xl:42px;
   --font-display-lg:34px;
@@ -54,6 +56,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .page.active{display:flex;}
 #page-pay{position:relative;}
 .scroll{flex:1;overflow-y:auto;}
+.overlay,.person-overlay,.txn-detail{overscroll-behavior:contain;}
 .auth-gate{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,0.82);display:none;align-items:center;justify-content:center;padding:22px;}
 .auth-gate.show{display:flex;}
 .auth-gate-card{width:100%;max-width:320px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 20px;text-align:center;}
@@ -814,8 +817,8 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
       <div class="pef-preview-name" id="pef-preview-name">Rajesh Karki</div>
       <div class="pef-preview-tag" id="pef-preview-tag">@rajesh_ktm</div>
       <div class="pef-preview-actions">
-        <button type="button" class="req">Request</button>
-        <button type="button" class="pay">Pay</button>
+        <button type="button" class="req" onclick="startProfilePreviewMoneyFlow('request')">Request</button>
+        <button type="button" class="pay" onclick="startProfilePreviewMoneyFlow('pay')">Pay</button>
       </div>
       <div class="pef-preview-fav">☆ Add to Favorites</div>
       <div class="pef-preview-joined"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/></svg>Joined Jun 2023</div>
@@ -864,21 +867,21 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
     <div class="td-hero"><div class="td-av clickable" id="td-av" onclick="openPersonProfileFromCurrentTxn()"></div><div class="td-name clickable" id="td-name" onclick="openPersonProfileFromCurrentTxn()"></div><div class="td-meta" id="td-meta"></div><div class="td-note2" id="td-note2"></div><div class="td-amt2" id="td-amt2"></div></div>
     <div class="td-div"></div>
     <div class="td-sec">
-      <h3>Transaction details</h3>
+      <h3>Transaction Details</h3>
       <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="td-rc"><div class="td-lbl">Complete</div><div class="td-val" id="td-status"></div></div></div>
-      <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="td-rc"><div class="td-lbl">Payment between</div><div class="td-val" id="td-between"></div></div></div>
-      <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="td-rc"><div class="td-lbl" id="td-src-lbl">Payment source</div><div class="td-val">MeroPay balance</div></div></div>
+      <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="td-rc"><div class="td-lbl">Payment Between</div><div class="td-val" id="td-between"></div></div></div>
+      <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="td-rc"><div class="td-lbl" id="td-src-lbl">Payment Source</div><div class="td-val">MeroPay Balance</div></div></div>
       <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="td-rc"><div class="td-lbl">Fees</div><div class="td-val">None applied</div></div></div>
       <div class="td-row"><div class="td-ri"><svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg></div><div class="td-rc"><div class="td-lbl">Transaction number</div><div class="td-val" id="td-txnid"></div></div><div class="td-ra"><button onclick="copyTxnId()"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></div>
     </div>
     <div class="td-div"></div>
     <div class="td-sec">
-      <h3>What you can do</h3>
-      <div class="wrow clickable" onclick="openPersonProfileFromCurrentTxn()"><svg class="wi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="wl" id="wl1">View history</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <h3>What You Can Do</h3>
+      <div class="wrow clickable" onclick="openPersonProfileFromCurrentTxn()"><svg class="wi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="wl" id="wl1">View History</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       <div class="wrow clickable" onclick="showToast('Block request sent (demo).')"><svg class="wi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span class="wl" id="wl2">Block</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       <div class="wrow clickable" onclick="showStub('Refund','Refund requests are reviewed within 3–5 business days.')"><svg class="wi" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg><span class="wl" id="wl3">Refund</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       <div class="wrow clickable" onclick="closeTxnDetail();showOverlay('support-overlay');"><svg class="wi" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="wl">Contact Support</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
-      <div class="wrow clickable" onclick="showStub('Report an issue','Thanks — our team will follow up by email.')"><svg class="wi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="wl">Report an issue</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="wrow clickable" onclick="showStub('Report an issue','Thanks — our team will follow up by email.')"><svg class="wi" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="wl">Report an Issue</span><svg class="wc" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
     </div>
     <div class="td-footer"><p>MeroPay Pvt. Ltd. · Hattisar, Kathmandu<br>+977-01-4XXXXXX · meropay.np</p></div>
   </div>
@@ -903,7 +906,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
       </div>
     </div>
     <div class="person-divider"></div>
-    <div class="person-sec-title">Your history</div>
+    <div class="person-sec-title">Your History</div>
     <div class="person-total-count" id="person-total-count">0</div>
     <div class="person-total-label">Total Transactions</div>
     <div class="person-totals">
@@ -933,7 +936,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
     <button type="button" class="ic" onclick="showToast('Messages with pay requests — coming soon.')" aria-label="Messages"><svg viewBox="0 0 24 24"><path d="M21 10.5a8.38 8.38 0 0 1-.9 3.8A8.5 8.5 0 0 1 7.5 21L3 22l1-4.5A8.38 8.38 0 0 1 3.5 13"/></svg></button>
   </div>
   <div class="seg-ctrl"><button class="seg-btn active" id="seg-scan" onclick="switchQRTab('scan')">Scan</button><button class="seg-btn" id="seg-share" onclick="switchQRTab('share')">Receive</button></div>
-  <div class="qr-scan-tab show" id="qr-scan-tab"><div class="qr-tab-title">Scan to pay</div><div class="viewfinder"><div class="scan-line"></div></div><div class="scan-hint">Hold steady until the code is recognised</div><div class="scan-dev"><input id="qr-scan-input" type="text" placeholder="Paste QR URL: https://app.meropay.com/pay/@coffee_shop?amount=500" /><button type="button" onclick="simulateScanFromInput()">Scan</button></div></div>
+  <div class="qr-scan-tab show" id="qr-scan-tab"><div class="qr-tab-title">Scan to Pay</div><div class="viewfinder"><div class="scan-line"></div></div><div class="scan-hint">Hold Steady Until the Code Is Recognized</div><div class="scan-dev"><input id="qr-scan-input" type="text" placeholder="Paste QR URL: https://app.meropay.com/pay/@coffee_shop?amount=500" /><button type="button" onclick="simulateScanFromInput()">Scan</button></div></div>
   <div class="qr-share-tab" id="qr-share-tab"><div class="share-name" id="qr-share-name">Rajesh Karki</div><div class="share-tag" id="qr-share-tag">@rajesh_ktm</div><div class="qr-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas><div class="qr-logo"><img src="Logo/App%20logo.jpg" alt="MeroPay logo" /></div></div></div>
 </div>
 
@@ -941,7 +944,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 <div class="overlay addcash-overlay" id="add-cash-overlay" onclick="if(event.target===this)closeAddCash();">
   <div class="withdraw-sheet" onclick="event.stopPropagation();">
     <div class="wd-handle" aria-hidden="true"></div>
-    <div class="wd-title">Quick top-up</div>
+    <div class="wd-title">Quick Top-Up</div>
     <div class="addcash-grid">
       <button type="button" class="addcash-chip" data-amt="500" onclick="selectAddCashPreset(500)">Rs 500</button>
       <button type="button" class="addcash-chip" data-amt="1000" onclick="selectAddCashPreset(1000)">Rs 1,000</button>
@@ -955,8 +958,8 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
       <span class="wd-amt-prefix" aria-hidden="true">Rs</span>
       <input type="text" class="wd-amt-input" id="addcash-amount-input" inputmode="numeric" autocomplete="off" aria-label="Amount to add in rupees" placeholder="0" oninput="onAddCashAmountInput(event)" />
     </div>
-    <button type="button" class="addcash-add-btn" onclick="confirmAddCash()">Add funds</button>
-    <button type="button" class="addcash-link" onclick="closeAddCash();showOverlay('am-overlay');">Other funding options</button>
+    <button type="button" class="addcash-add-btn" onclick="confirmAddCash()">Add Funds</button>
+    <button type="button" class="addcash-link" onclick="closeAddCash();showOverlay('am-overlay');">Other Funding Options</button>
     <button type="button" class="ov-dark-btn" style="margin-top:4px;" onclick="closeAddCash()">Cancel</button>
   </div>
 </div>
@@ -966,12 +969,12 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
   <div class="sb"><span>9:41</span><span></span><span></span></div>
   <div class="ov-topbar" style="padding-bottom:0;"><button onclick="hideOverlay('am-overlay')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
   <div class="ov-scroll">
-    <div class="ov-title">Fund your wallet</div>
-    <div class="ov-row clickable" onclick="showStub('Direct deposit','Receive money via bank transfer using your MeroPay account details.')"><svg class="oi" viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg><div class="ov-row-body"><div class="orl">Direct deposit</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-    <div class="ov-row clickable" onclick="showOverlay('banks-overlay');hideOverlay('am-overlay');"><svg class="oi" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg><div class="ov-row-body"><div class="orl">Bank or wire transfer</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-    <div class="ov-row clickable" onclick="showStub('Deposit cash','Add cash at partner banks and agents across Nepal.')"><svg class="oi" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg><div class="ov-row-body"><div class="orl">Deposit paper money</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-    <div class="ov-row clickable" onclick="showStub('Deposit check','Cheque clearing may take several days.')"><svg class="oi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div class="ov-row-body"><div class="orl">Deposit check</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-    <div class="ov-row clickable" onclick="showStub('Auto reload','Top up automatically when your balance drops below a set amount.')"><svg class="oi" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg><div class="ov-row-body"><div class="orl">Auto reload</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="ov-title">Fund Your Wallet</div>
+    <div class="ov-row clickable" onclick="showStub('Direct deposit','Receive money via bank transfer using your MeroPay account details.')"><svg class="oi" viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg><div class="ov-row-body"><div class="orl">Direct Deposit</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="ov-row clickable" onclick="showOverlay('banks-overlay');hideOverlay('am-overlay');"><svg class="oi" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg><div class="ov-row-body"><div class="orl">Bank or Wire Transfer</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="ov-row clickable" onclick="showStub('Deposit cash','Add cash at partner banks and agents across Nepal.')"><svg class="oi" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg><div class="ov-row-body"><div class="orl">Deposit Paper Money</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="ov-row clickable" onclick="showStub('Deposit check','Cheque clearing may take several days.')"><svg class="oi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div class="ov-row-body"><div class="orl">Deposit Check</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="ov-row clickable" onclick="showStub('Auto reload','Top up automatically when your balance drops below a set amount.')"><svg class="oi" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg><div class="ov-row-body"><div class="orl">Auto Reload</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
     <div class="ov-legal">Your balance is held by our licensed banking partner under NRB regulations. MeroPay is a payment service operator, not a bank. For details, see our <a href="javascript:void(0)" onclick="event.preventDefault();showStub('Terms of Service','Read the full terms at meropay.np/legal.')" style="color:var(--red);cursor:pointer;">Terms of Service</a>.</div>
   </div>
 </div>
@@ -1320,6 +1323,15 @@ function saveProfileTag(){
   syncTagAcrossProfile();
   closeProfileTagEditor();
   showToast('Username updated');
+}
+function startProfilePreviewMoneyFlow(mode){
+  closeProfileEditFlow();
+  navigate('pay');
+  payStr='';
+  resetPay();
+  openMoneyFlow(mode);
+  const ti=document.getElementById('req-to-input');
+  if(ti)ti.value=profileTag||'';
 }
 function updateProfileTagPreview(){
   const raw=document.getElementById('profile-tag-input').value.trim().toLowerCase();
@@ -1825,7 +1837,7 @@ async function executePayment(payload){
     });
     const data=await response.json();
     if(!response.ok||!data.success){
-      showToast(data.message||'Payment failed');
+      showToast(data?.error?.message||data?.message||'Payment failed');
       return false;
     }
     walletBalanceNum=data.balances.sender;
@@ -1899,10 +1911,10 @@ function openTxnDetail(idx){
   document.getElementById('td-note2').textContent=t.note;
   document.getElementById('td-amt2').textContent=(t.dir==='in'?'+ ':'- ')+'Rs '+t.amt.toLocaleString();
   document.getElementById('td-status').textContent=t.dir==='out'?'Payment sent successfully':'Payment received';
-  document.getElementById('td-src-lbl').textContent=t.dir==='out'?'Payment source':'Depositing to';
+  document.getElementById('td-src-lbl').textContent=t.dir==='out'?'Payment Source':'Depositing To';
   document.getElementById('td-between').innerHTML=t.dir==='out'?`To: ${t.name}<br>From: ${profileLegalName}`:`From: ${t.name}<br>To: ${profileLegalName}`;
   document.getElementById('td-txnid').textContent=id;document.getElementById('td-txnid').dataset.id=id;
-  document.getElementById('wl1').textContent='View history with '+t.name.split(' ')[0];
+  document.getElementById('wl1').textContent='View History with '+t.name.split(' ')[0];
   document.getElementById('wl2').textContent='Block '+t.name.split(' ')[0];
   document.getElementById('wl3').textContent='Refund '+t.name.split(' ')[0];
   document.getElementById('txn-detail').classList.add('show');

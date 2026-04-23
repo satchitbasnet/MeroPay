@@ -35,6 +35,19 @@ npm run build
 npm run preview
 ```
 
+## Smoke Check
+
+Run a local smoke check for frontend build + backend health:
+
+```bash
+npm run smoke
+```
+
+`smoke` performs:
+
+- `npm run build`
+- backend health probe against `GET /api/health`
+
 ## Auto Git Commit (Local)
 
 This project includes a local watcher script that auto-commits after a short idle period.
@@ -51,3 +64,18 @@ Current behavior:
 - Does **not** push to remote
 
 Script path: `scripts/auto-git-sync.ps1`
+
+## API Error Shape
+
+For failed API calls, backend returns:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable message",
+    "details": {}
+  }
+}
+```
