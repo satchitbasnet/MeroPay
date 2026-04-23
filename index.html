@@ -4,7 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Roboto",sans-serif;}
+:root{
+  --font-display-xl:42px;
+  --font-display-lg:34px;
+  --font-display-md:28px;
+  --font-input-xl:32px;
+  --font-keypad-large:72px;
+  --font-keypad-medium:56px;
+  --font-keypad-small:40px;
+  --font-title:24px;
+  --font-body-large:18px;
+  --font-body-regular:16px;
+  --font-caption:14px;
+  --font-micro:12px;
+}
 body{background:#222;display:flex;justify-content:center;padding:16px 0;min-height:100vh;}
 
 /* ── THEME VARIABLES ON .phone ── */
@@ -40,6 +54,55 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .page.active{display:flex;}
 #page-pay{position:relative;}
 .scroll{flex:1;overflow-y:auto;}
+.auth-gate{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,0.82);display:none;align-items:center;justify-content:center;padding:22px;}
+.auth-gate.show{display:flex;}
+.auth-gate-card{width:100%;max-width:320px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 20px;text-align:center;}
+.auth-gate-card h3{font-size:22px;color:var(--text);margin-bottom:8px;}
+.auth-gate-card p{font-size:14px;color:var(--muted);line-height:1.45;margin-bottom:16px;}
+.auth-gate-card button{width:100%;padding:13px;border:none;border-radius:14px;background:var(--red);color:#fff;font-size:15px;font-weight:700;cursor:pointer;}
+.onb-wrap{position:absolute;inset:0;z-index:210;background:#efeff1;display:none;flex-direction:column;}
+.onb-wrap.show{display:flex;}
+.onb-step{display:none;flex:1;flex-direction:column;padding:14px 20px;}
+.onb-step.show{display:flex;}
+.onb-green{background:var(--red);color:#fff;align-items:center;justify-content:center;}
+.onb-brand{font-size:var(--font-display-xl);font-weight:800;letter-spacing:-0.8px;}
+.onb-wait{position:absolute;bottom:76px;left:0;right:0;text-align:center;font-size:14px;color:rgba(255,255,255,0.75);}
+.onb-head{font-size:var(--font-display-lg);color:#171722;font-weight:800;line-height:1;}
+.onb-sub{color:#6f7078;font-size:14px;margin-top:8px;}
+.onb-title{font-size:24px;color:#171722;font-weight:800;line-height:1.2;margin:50px 0 8px;}
+.onb-field{font-size:var(--font-input-xl);color:#171722;border:none;border-bottom:2px solid transparent;background:transparent;outline:none;padding:6px 0;}
+.onb-field::placeholder{color:#b6b8be;}
+.onb-phone-row{display:flex;align-items:center;gap:8px;}
+.onb-prefix{font-size:var(--font-input-xl);color:#171722;}
+.onb-keypad{margin-top:auto;padding-bottom:20px;}
+.onb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.onb-k{height:58px;border:none;border-radius:12px;background:#f8f8fb;font-size:22px;color:#3f4048;cursor:pointer;border:1px solid #d9dae1;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;}
+.onb-k small{font-size:11px;letter-spacing:.08em;color:#4f5058;margin-top:3px;}
+.onb-bottom{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.onb-btn{height:58px;border:none;border-radius:999px;font-size:16px;font-weight:700;cursor:pointer;}
+.onb-btn.light{background:#e8e8ec;color:#3d3d44;}
+.onb-btn.green{background:var(--red);color:#fff;}
+.onb-btn:disabled{opacity:.45;cursor:not-allowed;}
+.onb-single{grid-template-columns:1fr;}
+.onb-top{display:flex;justify-content:space-between;align-items:center;height:36px;}
+.onb-top .x{font-size:var(--font-display-md);color:#30313a;cursor:pointer;border:none;background:none;}
+.onb-top .q{font-size:var(--font-display-md);color:#30313a;font-weight:700;border:none;background:none;}
+.onb-body{padding:16px 4px 0;}
+.onb-step.onb-email-mode .onb-body{text-align:center;padding-top:28px;}
+.onb-step.onb-email-mode .onb-phone-row{justify-content:center;}
+.onb-step.onb-email-mode .onb-field{text-align:center;max-width:320px;width:100%;}
+.onb-step.onb-email-mode .onb-grid{display:none;}
+.onb-cta{margin-top:auto;padding-bottom:20px;}
+.onb-cta .onb-btn{width:100%;}
+.onb-invite-icon{width:64px;height:64px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;margin:18px 0;}
+.onb-invite-title{font-size:24px;color:#1a1b22;font-weight:800;line-height:1.2;}
+.onb-invite-sub{font-size:16px;color:#7a7b84;line-height:1.4;margin-top:8px;}
+.onb-terms{margin-top:auto;color:#65666d;font-size:13px;line-height:1.45;}
+.onb-terms a{color:#4a4b51;text-decoration:underline;}
+.onb-hidden{display:none!important;}
+.onb-success{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;}
+.onb-success-check{width:62px;height:62px;border-radius:50%;border:4px solid var(--red);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:var(--font-display-md);font-weight:800;}
+.onb-success-title{font-size:var(--font-display-lg);font-weight:700;color:#25262d;text-align:center;}
 
 /* STATUS BAR */
 .sb{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;}
@@ -59,9 +122,9 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .ic svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;}
 
 /* ── HOME ── */
-.home-header{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 20px 14px;gap:12px;}
-.home-header-text h1{font-size:26px;font-weight:800;color:var(--text);letter-spacing:-0.6px;line-height:1.15;margin:0;}
-.home-header-text p{font-size:14px;color:var(--muted);margin-top:4px;font-weight:500;}
+.home-header{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 14px;gap:12px;}
+.home-header-text h1{font-size:var(--font-title);font-weight:800;color:var(--text);letter-spacing:-0.4px;line-height:1.15;margin:0;}
+.home-header-text p{font-size:var(--font-caption);color:var(--muted);margin-top:4px;font-weight:500;}
 .bal-card{background:var(--card);border-radius:18px;margin:0 18px 18px;padding:0;border:1px solid var(--border);box-shadow:0 2px 12px rgba(15,23,42,0.06);}
 .bal-inner{padding:18px 18px 17px;border-left:4px solid var(--red);border-radius:18px;}
 .bal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
@@ -81,9 +144,9 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .txn-list{padding:0 20px 20px;}
 .txn-row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--border);cursor:pointer;}
 .txn-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
-.txn-nm{color:var(--text);font-size:15px;font-weight:500;}
-.txn-sub{color:var(--muted);font-size:13px;margin-top:2px;}
-.txn-amt{color:var(--text);font-size:15px;font-weight:600;text-align:right;}
+.txn-nm{color:var(--text);font-size:var(--font-body-regular);font-weight:600;}
+.txn-sub{color:var(--muted);font-size:var(--font-caption);margin-top:2px;}
+.txn-amt{color:var(--text);font-size:var(--font-body-regular);font-weight:700;text-align:right;}
 
 /* ── PAY / SEND (amount → keypad → Request | Pay) ── */
 .pay-main{flex:1;background:var(--bg);display:flex;flex-direction:column;min-height:0;}
@@ -93,7 +156,12 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .pay-icon-btn svg{width:19px;height:19px;stroke:var(--text);fill:none;stroke-width:2;}
 .pay-scroll{flex:1;overflow:auto;display:flex;flex-direction:column;justify-content:center;padding:12px 20px 8px;min-height:0;}
 .pay-disp{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-.pay-big{font-size:58px;font-weight:800;color:var(--text);letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums;word-break:break-all;}
+.pay-big{font-size:var(--font-keypad-large);font-weight:800;color:var(--text);letter-spacing:-2px;line-height:1;font-variant-numeric:tabular-nums;word-break:break-all;display:flex;align-items:flex-start;justify-content:center;gap:4px;}
+.pay-big.keypad-medium{font-size:var(--font-keypad-medium);}
+.pay-big.keypad-small{font-size:var(--font-keypad-small);}
+.pay-big-currency{font-size:0.82em;line-height:1.1;opacity:.95;}
+.pay-big-main{font-size:1em;line-height:1;}
+.pay-big-decimal{font-size:0.5em;line-height:1.1;transform:translateY(0.15em);}
 .pay-amt-meta{font-size:13px;color:var(--muted);font-weight:500;margin-top:10px;}
 .pay-keypad-wrap{margin-top:auto;padding:4px 0 0;background:var(--bg);}
 .numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;padding:14px 18px 10px;max-width:400px;margin:0 auto;width:100%;}
@@ -149,7 +217,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 
 /* ── ACTIVITY ── */
 .act-topbar{display:flex;justify-content:space-between;align-items:center;padding:6px 20px 10px;}
-.act-topbar h1{color:var(--text);font-size:24px;font-weight:700;}
+.act-topbar h1{color:var(--text);font-size:var(--font-title);font-weight:700;}
 .act-search{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:50px;padding:10px 16px;margin:0 20px 14px;}
 .act-search svg{width:16px;height:16px;stroke:var(--muted);fill:none;flex-shrink:0;}
 .act-search span{color:var(--muted);font-size:14px;}
@@ -158,9 +226,9 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .act-item{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:0.5px solid var(--border);cursor:pointer;}
 .act-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
 .act-det{flex:1;min-width:0;}
-.act-nm{color:var(--text);font-size:15px;font-weight:500;}
-.act-sub{color:var(--muted);font-size:13px;margin-top:2px;}
-.act-amt{color:var(--text);font-size:15px;font-weight:600;text-align:right;flex-shrink:0;}
+.act-nm{color:var(--text);font-size:var(--font-body-regular);font-weight:600;}
+.act-sub{color:var(--muted);font-size:var(--font-caption);margin-top:2px;}
+.act-amt{color:var(--text);font-size:var(--font-body-regular);font-weight:700;text-align:right;flex-shrink:0;}
 
 /* ── TXN DETAIL ── */
 .txn-detail{position:absolute;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:40;overflow-y:auto;}
@@ -173,7 +241,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .td-name{color:var(--text);font-size:28px;font-weight:800;margin-bottom:4px;}
 .td-meta{color:var(--muted);font-size:14px;margin-bottom:2px;}
 .td-note2{color:var(--muted);font-size:14px;margin-bottom:16px;}
-.td-amt2{color:var(--text);font-size:50px;font-weight:800;letter-spacing:-1px;}
+.td-amt2{color:var(--text);font-size:var(--font-display-xl);font-weight:800;letter-spacing:-1px;}
 .td-div{height:0.5px;background:var(--border);margin:0 24px;}
 .td-sec{padding:18px 24px;}
 .td-sec h3{color:var(--text);font-size:20px;font-weight:700;margin-bottom:16px;}
@@ -201,17 +269,17 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .person-top button svg{width:22px;height:22px;stroke:var(--text);fill:none;stroke-width:2;}
 .person-hero{padding:8px 0 14px;}
 .person-av{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;margin-bottom:14px;}
-.person-name{color:var(--text);font-size:46px;line-height:0.95;letter-spacing:-1.6px;font-weight:800;}
-.person-tag{color:var(--muted);font-size:31px;line-height:1.1;font-weight:500;margin-bottom:20px;}
+.person-name{color:var(--text);font-size:24px;line-height:1.15;letter-spacing:-0.4px;font-weight:800;}
+.person-tag{color:var(--muted);font-size:16px;line-height:1.2;font-weight:500;margin-bottom:16px;}
 .person-facts{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;}
 .person-fact{display:flex;align-items:center;gap:10px;color:var(--text);font-size:15px;}
 .person-fact svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:1.9;opacity:0.9;flex-shrink:0;}
 .person-divider{height:0.5px;background:var(--border);margin:2px 0 14px;}
-.person-sec-title{color:var(--text);font-size:40px;line-height:0.98;letter-spacing:-1.2px;font-weight:800;margin-bottom:10px;}
-.person-total-count{color:var(--text);font-size:58px;line-height:0.9;letter-spacing:-2px;font-weight:800;}
+.person-sec-title{color:var(--text);font-size:22px;line-height:1.15;letter-spacing:-0.3px;font-weight:800;margin-bottom:8px;}
+.person-total-count{color:var(--text);font-size:28px;line-height:1;letter-spacing:-0.5px;font-weight:800;}
 .person-total-label{color:var(--muted);font-size:13px;margin-top:4px;}
 .person-totals{display:flex;justify-content:space-between;align-items:flex-end;margin:12px 0 6px;}
-.person-total-col .amt{color:var(--text);font-size:40px;line-height:1;font-weight:800;letter-spacing:-1px;}
+.person-total-col .amt{color:var(--text);font-size:20px;line-height:1.1;font-weight:800;letter-spacing:-0.2px;}
 .person-total-col .lbl{color:var(--muted);font-size:12px;margin-top:4px;}
 .person-total-col.right{text-align:right;}
 .person-bar{height:14px;background:var(--card2);border-radius:999px;overflow:hidden;border:1px solid var(--border);margin-bottom:18px;}
@@ -263,6 +331,76 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .logout-row{display:flex;align-items:center;gap:16px;padding:15px 18px;background:var(--prof-card);border-radius:20px;margin:0 16px 24px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.05),inset 4px 0 0 var(--red);}
 .logout-row svg{width:22px;height:22px;stroke:var(--red);fill:none;stroke-width:1.8;}
 .logout-row span{font-size:15px;font-weight:600;color:var(--red);}
+.account-overlay{background:#efeff1;}
+.account-wrap{display:flex;flex-direction:column;height:100%;}
+.account-head{padding:12px 20px 14px;display:flex;justify-content:space-between;align-items:center;background:#efeff1;border-bottom:1px solid rgba(0,0,0,0.05);}
+.account-head h2{font-size:var(--font-display-lg);line-height:1;font-weight:800;color:#202128;}
+.account-close{border:none;background:none;font-size:var(--font-display-lg);color:#2f3038;cursor:pointer;}
+.account-list{background:#fff;margin-top:0;}
+.account-row{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid rgba(0,0,0,0.05);}
+.account-row:last-child{border-bottom:none;}
+.account-row svg{width:20px;height:20px;stroke:#2f3038;fill:none;stroke-width:1.9;flex-shrink:0;}
+.account-row .lbl{flex:1;color:#25262d;font-size:15px;font-weight:600;}
+.account-row .chev{width:16px;height:16px;stroke:#c4c4ca;stroke-width:2;}
+.account-signout-wrap{margin-top:auto;background:#efeff1;padding:14px 0 10px;border-top:1px solid rgba(0,0,0,0.05);}
+.account-signout{background:#fff;text-align:center;color:#b51f49;font-size:17px;font-weight:700;padding:14px 12px;cursor:pointer;}
+.account-footer{background:#efeff1;text-align:center;padding:14px 24px 28px;}
+.account-footer svg{width:22px;height:22px;stroke:#7d7e86;fill:none;stroke-width:1.8;margin:0 auto 8px;}
+.account-footer p{font-size:11px;line-height:1.35;color:#7d7e86;}
+.account-confirm{position:absolute;inset:0;background:rgba(0,0,0,0.38);display:none;align-items:center;justify-content:center;padding:28px;}
+.account-confirm.show{display:flex;}
+.account-confirm-card{width:100%;max-width:320px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 38px rgba(0,0,0,0.25);}
+.account-confirm-title{padding:26px 18px;text-align:center;font-size:18px;font-weight:700;color:#25262d;border-bottom:1px solid rgba(0,0,0,0.08);}
+.account-confirm-actions{display:grid;grid-template-columns:1fr 1fr;}
+.account-confirm-actions button{height:56px;border:none;background:#fff;font-size:16px;font-weight:700;cursor:pointer;}
+.account-confirm-actions button:first-child{color:#10a34a;border-right:1px solid rgba(0,0,0,0.08);}
+.account-confirm-actions button:last-child{color:#b51f49;}
+.profile-edit-flow{background:linear-gradient(180deg,#f6f2f7 0%,#f2f3f8 35%,#eef0f7 100%);z-index:62;}
+.pef-wrap{display:flex;flex-direction:column;height:100%;}
+.pef-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;}
+.pef-head h2{font-size:18px;font-weight:800;color:#23242b;letter-spacing:.01em;}
+.pef-icon-btn{border:none;background:rgba(255,255,255,0.92);color:#25262d;font-size:24px;cursor:pointer;width:36px;height:36px;line-height:1;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08);}
+.pef-seg{margin:8px 16px 14px;background:rgba(255,255,255,0.9);border-radius:14px;display:grid;grid-template-columns:1fr 1fr;padding:4px;box-shadow:0 6px 18px rgba(15,23,42,0.08);}
+.pef-seg button{height:38px;border:none;border-radius:10px;background:none;font-size:15px;font-weight:700;color:#727381;cursor:pointer;}
+.pef-seg button.active{background:linear-gradient(135deg,#fff 0%,#f7f1f4 100%);color:#21222a;box-shadow:0 3px 10px rgba(220,20,60,0.14);}
+.pef-body{flex:1;overflow:auto;padding:0 16px 24px;}
+.pef-avatar{width:108px;height:108px;border-radius:30px;margin:10px auto 14px;background:linear-gradient(145deg,#ffffff 0%,#ffe8ef 100%);border:1.5px solid rgba(220,20,60,0.2);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;color:var(--red);position:relative;box-shadow:0 8px 28px rgba(220,20,60,0.18);}
+.pef-avatar-edit{position:absolute;right:-4px;bottom:-4px;width:30px;height:30px;border-radius:10px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;border:2px solid #fff;}
+.pef-sec-title{font-size:22px;font-weight:800;color:#23242b;margin:0 0 6px;}
+.pef-sec-sub{font-size:13px;color:#6f7078;line-height:1.45;margin-bottom:14px;}
+.pef-row{padding:14px;border:1px solid rgba(0,0,0,0.08);border-radius:14px;cursor:pointer;background:#fff;box-shadow:0 3px 12px rgba(15,23,42,0.06);margin-bottom:10px;}
+.pef-row-lbl{font-size:12px;color:#777887;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;}
+.pef-row-val{font-size:17px;font-weight:700;color:#25262d;display:flex;justify-content:space-between;align-items:center;}
+.pef-row-val svg{width:16px;height:16px;stroke:#bcbcc4;fill:none;stroke-width:2;}
+.pef-switch{margin-top:14px;padding:15px 16px;background:rgba(16,163,74,0.1);border:1px solid rgba(16,163,74,0.28);border-radius:14px;color:#148c45;font-size:16px;font-weight:700;text-align:center;}
+.pef-preview-name{font-size:24px;font-weight:800;color:#23242b;text-align:center;line-height:1.2;margin-top:8px;}
+.pef-preview-tag{font-size:14px;color:#7a7b84;text-align:center;margin-top:4px;}
+.pef-preview-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 12px;}
+.pef-preview-actions button{height:48px;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;}
+.pef-preview-actions .req{background:#ececf1;color:#90919a;}
+.pef-preview-actions .pay{background:var(--red);color:#fff;}
+.pef-preview-fav{height:46px;border:1px solid rgba(0,0,0,0.09);border-radius:14px;background:#fff;color:#565764;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;}
+.pef-preview-joined{margin-top:16px;display:flex;align-items:center;gap:10px;color:#25262d;font-size:14px;font-weight:600;}
+.pef-preview-joined svg{width:18px;height:18px;stroke:var(--red);fill:none;stroke-width:2;}
+.pef-preview-foot{font-size:13px;color:#7a7b84;line-height:1.45;margin-top:16px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.85);border:1px solid rgba(0,0,0,0.06);}
+.pef-sheet{position:absolute;inset:0;background:rgba(0,0,0,0.32);display:none;align-items:flex-end;justify-content:center;padding:0 0 10px;z-index:63;}
+.pef-sheet.show{display:flex;}
+.pef-sheet-card{width:100%;max-width:375px;background:#fff;border-radius:24px 24px 16px 16px;overflow:hidden;}
+.pef-sheet-item{height:58px;border:none;background:#fff;width:100%;font-size:18px;color:#25262d;cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.08);}
+.pef-sheet-item.cancel{font-weight:700;border-bottom:none;}
+.pef-modal{position:absolute;inset:0;background:linear-gradient(180deg,#f6f2f7 0%,#f2f3f8 100%);display:none;flex-direction:column;z-index:64;}
+.pef-modal.show{display:flex;}
+.pef-modal-head{display:flex;justify-content:flex-end;padding:10px 16px 0;}
+.pef-modal-head button{border:none;background:none;font-size:var(--font-display-lg);color:#2f3038;cursor:pointer;line-height:1;}
+.pef-modal-body{padding:8px 20px 22px;display:flex;flex-direction:column;height:100%;}
+.pef-modal h3{font-size:32px;line-height:1.08;font-weight:800;color:#23242b;margin-bottom:10px;}
+.pef-modal p{font-size:15px;color:#6f7078;line-height:1.45;margin-bottom:16px;}
+.pef-input{background:#fff;border:1.5px solid rgba(0,0,0,0.14);border-radius:14px;padding:14px 14px;font-size:20px;font-weight:700;color:#22232b;outline:none;font-family:inherit;}
+.pef-input-wrap{position:relative;margin-bottom:8px;}
+.pef-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:700;color:#22232b;}
+.pef-input.has-prefix{padding-left:34px;}
+.pef-helper{margin-top:auto;font-size:14px;color:#6f7078;}
+.pef-save{margin-top:14px;height:56px;border:none;border-radius:999px;background:var(--red);color:#fff;font-size:24px;font-weight:700;cursor:pointer;font-family:inherit;}
 
 /* ── OVERLAYS (shared dark style) ── */
 .overlay{position:absolute;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:50;overflow:hidden;}
@@ -328,11 +466,14 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .scan-line{position:absolute;left:0;right:0;height:2px;background:var(--red);animation:scan 2s ease-in-out infinite;}
 @keyframes scan{0%,100%{top:8%;}50%{top:88%;}}
 .scan-hint{color:var(--muted);font-size:13px;text-align:center;margin-top:12px;}
+.scan-dev{margin-top:14px;display:flex;gap:8px;}
+.scan-dev input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px;color:var(--text);font-size:13px;outline:none;}
+.scan-dev button{background:var(--red);border:none;border-radius:12px;padding:10px 14px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;}
 .share-name{color:var(--text);font-size:26px;font-weight:800;margin-bottom:4px;}
 .share-tag{color:var(--muted);font-size:16px;margin-bottom:24px;}
 .qr-wrap{background:white;border-radius:24px;padding:20px;display:flex;align-items:center;justify-content:center;position:relative;}
-.qr-logo{position:absolute;width:52px;height:52px;border-radius:14px;background:var(--red);display:flex;align-items:center;justify-content:center;}
-.qr-logo svg{width:26px;height:26px;stroke:white;fill:none;stroke-width:2;}
+.qr-logo{position:absolute;width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(0,0,0,0.08);}
+.qr-logo img{width:100%;height:100%;object-fit:cover;display:block;}
 /* Identity verification wizard */
 .id-verify-overlay{z-index:55;}
 .edit-profile-overlay{z-index:56;}
@@ -343,10 +484,10 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .wd-handle{width:40px;height:5px;background:var(--prof-border);border-radius:3px;margin:4px auto 12px;}
 .wd-title{font-size:17px;font-weight:700;color:var(--prof-text);text-align:center;margin-bottom:2px;}
 .wd-available{font-size:12px;color:var(--prof-muted);text-align:center;letter-spacing:0.06em;margin-bottom:14px;}
-.wd-amt{font-size:46px;font-weight:800;color:var(--accent);text-align:center;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;}
+.wd-amt{font-size:var(--font-display-xl);font-weight:800;color:var(--accent);text-align:center;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;}
 .wd-amt-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;padding:0 8px;}
-.wd-amt-prefix{font-size:36px;font-weight:800;color:var(--accent);line-height:1;flex-shrink:0;}
-.wd-amt-input{flex:1 1 auto;min-width:72px;max-width:min(90vw,280px);font-size:46px;font-weight:800;color:var(--accent);border:none;background:transparent;outline:none;font-family:inherit;letter-spacing:-1.5px;line-height:1.1;text-align:center;}
+.wd-amt-prefix{font-size:var(--font-input-xl);font-weight:800;color:var(--accent);line-height:1;flex-shrink:0;}
+.wd-amt-input{flex:1 1 auto;min-width:72px;max-width:min(90vw,280px);font-size:var(--font-display-xl);font-weight:800;color:var(--accent);border:none;background:transparent;outline:none;font-family:inherit;letter-spacing:-1.5px;line-height:1.1;text-align:center;}
 .wd-amt-input::placeholder{color:rgba(99,102,241,0.35);}
 .wd-slider{width:100%;height:10px;-webkit-appearance:none;appearance:none;background:rgba(0,0,0,0.08);border-radius:6px;outline:none;margin-bottom:20px;}
 .wd-slider::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#9333ea);cursor:pointer;box-shadow:0 4px 14px rgba(99,102,241,0.45);}
@@ -393,34 +534,88 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 </head>
 <body>
 <div class="phone theme-light" id="phone">
+<div class="auth-gate" id="auth-gate">
+  <div class="auth-gate-card">
+    <h3>Sign in to MeroPay</h3>
+    <p>Your Neon account is required before using wallet and transfer features.</p>
+    <button type="button" onclick="openAuthSignIn()">Continue with Neon Auth</button>
+  </div>
+</div>
+<div class="onb-wrap" id="onb-wrap">
+  <div class="onb-step onb-green show" id="onb-step-0">
+    <div class="onb-brand">MeroPay</div>
+    <div class="onb-wait">Please wait...</div>
+  </div>
+  <div class="onb-step" id="onb-step-1">
+    <div class="onb-top"><span></span><button class="q">?</button></div>
+    <div class="onb-body">
+      <div class="onb-title">Enter your phone or email</div>
+      <div class="onb-phone-row"><span class="onb-prefix" id="onb-prefix">+977</span><input id="onb-phone" class="onb-field" placeholder="Phone Number" readonly oninput="onbContactInput()" /></div>
+    </div>
+    <div class="onb-terms">By entering and tapping Next, you agree to the <a href="javascript:void(0)" onclick="showStub('Terms','Terms and conditions placeholder.')">Terms</a>, <a href="javascript:void(0)" onclick="showStub('E-Sign Consent','E-Sign consent placeholder.')">E-Sign Consent</a> &amp; <a href="javascript:void(0)" onclick="showStub('Privacy Notice','Privacy notice placeholder.')">Privacy Notice</a>.</div>
+    <div class="onb-keypad">
+      <div class="onb-grid">
+        <button class="onb-k" onclick="onbDigit('1')">1</button><button class="onb-k" onclick="onbDigit('2')">2</button><button class="onb-k" onclick="onbDigit('3')">3</button>
+        <button class="onb-k" onclick="onbDigit('4')">4</button><button class="onb-k" onclick="onbDigit('5')">5</button><button class="onb-k" onclick="onbDigit('6')">6</button>
+        <button class="onb-k" onclick="onbDigit('7')">7</button><button class="onb-k" onclick="onbDigit('8')">8</button><button class="onb-k" onclick="onbDigit('9')">9</button>
+        <button class="onb-k" onclick="onbDigit('0')" style="grid-column:2;">0</button>
+        <button class="onb-k" onclick="onbBackspace()">⌫</button>
+      </div>
+      <div class="onb-bottom"><button class="onb-btn light" id="onb-toggle-email" onclick="onbToggleUseEmail()">Use Email</button><button class="onb-btn green" id="onb-phone-next" onclick="onbNextFromPhone()" disabled>Next</button></div>
+    </div>
+  </div>
+  <div class="onb-step" id="onb-step-2">
+    <div class="onb-top"><span></span><button class="q">?</button></div>
+    <div class="onb-body">
+      <div class="onb-title">Please enter the code sent to <span id="onb-phone-display">98XXXXXXXX</span></div>
+      <input id="onb-code" class="onb-field" placeholder="Confirmation Code" readonly />
+    </div>
+    <div class="onb-cta"><button class="onb-btn green" id="onb-code-next" onclick="onbShowSuccess()" disabled>Next</button></div>
+    <div class="onb-keypad">
+      <div class="onb-grid">
+        <button class="onb-k" onclick="onbCodeDigit('1')">1</button><button class="onb-k" onclick="onbCodeDigit('2')">2</button><button class="onb-k" onclick="onbCodeDigit('3')">3</button>
+        <button class="onb-k" onclick="onbCodeDigit('4')">4</button><button class="onb-k" onclick="onbCodeDigit('5')">5</button><button class="onb-k" onclick="onbCodeDigit('6')">6</button>
+        <button class="onb-k" onclick="onbCodeDigit('7')">7</button><button class="onb-k" onclick="onbCodeDigit('8')">8</button><button class="onb-k" onclick="onbCodeDigit('9')">9</button>
+        <button class="onb-k" onclick="onbCodeDigit('0')" style="grid-column:2;">0</button>
+        <button class="onb-k" onclick="onbCodeBackspace()">⌫</button>
+      </div>
+    </div>
+  </div>
+  <div class="onb-step" id="onb-step-3">
+    <div class="onb-success">
+      <div class="onb-success-check">✓</div>
+      <div class="onb-success-title">Welcome to MeroPay!</div>
+    </div>
+  </div>
+</div>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="scroll">
     <div class="sb"><span>9:41</span><span style="font-weight:700;font-size:14px;">MeroPay</span><span></span></div>
     <div class="home-header">
-      <div class="home-header-text"><h1>Home</h1><p>Wallet balance</p></div>
+      <div class="home-header-text"><h1>Wallet</h1></div>
       <button type="button" class="ic" onclick="navigate('profile')" aria-label="Account"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
     </div>
     <div class="bal-card">
       <div class="bal-inner">
-      <div class="bal-top"><span class="bal-tag clickable" onclick="showStub('MeroPay balance','Your wallet balance. MeroPay doesn’t issue cards — this is electronic money held for you by our licensed banking partner, per NRB rules.')" role="button" tabindex="0">Balance</span><button type="button" class="bal-eye" onclick="toggleBalanceHidden()" aria-label="Hide or show balance"><svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/></svg></button></div>
+      <div class="bal-top"><span class="bal-tag clickable" onclick="showStub('MeroPay balance','Your wallet balance. MeroPay doesn’t issue cards — this is electronic money held for you by our licensed banking partner, per NRB rules.')" role="button" tabindex="0">Balance</span><button type="button" class="bal-eye" onclick="toggleBalanceHidden()" aria-label="Hide or show balance"><svg id="bal-eye-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
       <div class="bal-amt" id="bal-amt">Rs 45,280</div>
-      <div class="two-btns"><button type="button" class="dark-pill" onclick="openAddCash()">Add funds</button><button type="button" class="dark-pill secondary" onclick="openWithdraw()">Bank transfer</button></div>
+      <div class="two-btns"><button type="button" class="dark-pill" onclick="openAddCash()">Add Funds</button><button type="button" class="dark-pill secondary" onclick="openWithdraw()">Bank Transfer</button></div>
       </div>
     </div>
     <div class="sec-title">Recent</div>
     <div class="bubbles">
-      <div class="bubble clickable" onclick="quickPayTo('Sita')"><div class="bav" style="background:#fdeaee;color:#DC143C;">SP</div><div class="bname">Sita</div></div>
-      <div class="bubble clickable" onclick="quickPayTo('Bikram')"><div class="bav" style="background:#e6edf9;color:#003893;">BR</div><div class="bname">Bikram</div></div>
-      <div class="bubble clickable" onclick="quickPayTo('Anu')"><div class="bav" style="background:#f0fdf4;color:#16a34a;">AM</div><div class="bname">Anu</div></div>
-      <div class="bubble clickable" onclick="quickPayTo('Dipesh')"><div class="bav" style="background:#fdf4e7;color:#d97706;">DS</div><div class="bname">Dipesh</div></div>
-      <div class="bubble clickable" onclick="quickPayTo('Priya')"><div class="bav" style="background:#f5eafd;color:#7c3aed;">PK</div><div class="bname">Priya</div></div>
+      <div class="bubble clickable" onclick="quickPayTo('Sita Pandey')"><div class="bav" style="background:#fdeaee;color:#DC143C;">SP</div><div class="bname">Sita</div></div>
+      <div class="bubble clickable" onclick="quickPayTo('Bikram Rana')"><div class="bav" style="background:#e6edf9;color:#003893;">BR</div><div class="bname">Bikram</div></div>
+      <div class="bubble clickable" onclick="quickPayTo('Anu Magar')"><div class="bav" style="background:#f0fdf4;color:#16a34a;">AM</div><div class="bname">Anu</div></div>
+      <div class="bubble clickable" onclick="quickPayTo('Dipesh Shrestha')"><div class="bav" style="background:#fdf4e7;color:#d97706;">DS</div><div class="bname">Dipesh</div></div>
+      <div class="bubble clickable" onclick="quickPayTo('Priya Karki')"><div class="bav" style="background:#f5eafd;color:#7c3aed;">PK</div><div class="bname">Priya</div></div>
     </div>
     <div class="txn-list">
-      <div class="txn-row" onclick="openTxnDetail(0)"><div class="txn-av" style="background:#fdeaee;color:#DC143C;">SP</div><div style="flex:1;"><div class="txn-nm">Sita Pandey</div><div class="txn-sub">Dinner split · 2h ago</div></div><div class="txn-amt">Rs 850</div></div>
+      <div class="txn-row" onclick="openTxnDetail(0)"><div class="txn-av" style="background:#fdeaee;color:#DC143C;">SP</div><div style="flex:1;"><div class="txn-nm">Sita Pandey</div><div class="txn-sub">Dinner split · 2h ago</div></div><div class="txn-amt">- Rs 850</div></div>
       <div class="txn-row" onclick="openTxnDetail(1)"><div class="txn-av" style="background:#e6edf9;color:#003893;">BR</div><div style="flex:1;"><div class="txn-nm">Bikram Rana</div><div class="txn-sub">Rent share · Yesterday</div></div><div class="txn-amt">+ Rs 5,000</div></div>
-      <div class="txn-row" onclick="openTxnDetail(2)"><div class="txn-av" style="background:#f0fdf4;color:#16a34a;">AM</div><div style="flex:1;"><div class="txn-nm">Anu Magar</div><div class="txn-sub">Movie tickets · 2 days ago</div></div><div class="txn-amt">Rs 1,200</div></div>
+      <div class="txn-row" onclick="openTxnDetail(2)"><div class="txn-av" style="background:#f0fdf4;color:#16a34a;">AM</div><div style="flex:1;"><div class="txn-nm">Anu Magar</div><div class="txn-sub">Movie tickets · 2 days ago</div></div><div class="txn-amt">- Rs 1,200</div></div>
     </div>
   </div>
 </div>
@@ -501,21 +696,21 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
           <button type="button" onclick="shareProfileLink()" aria-label="Share profile"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
         </div>
       </div>
-      <div class="prof-av-wrap"><div class="prof-av" id="prof-av-initials">RK</div><div class="prof-name" id="prof-header-name">Rajesh Karki</div><div class="prof-tag">@rajesh_ktm</div></div>
+      <div class="prof-av-wrap"><div class="prof-av" id="prof-av-initials">RK</div><div class="prof-name" id="prof-header-name">Rajesh Karki</div><div class="prof-tag" id="prof-header-tag">@rajesh_ktm</div></div>
     </div>
     <div class="p-card">
       <div class="p-card-inner">
         <div class="p-field-lbl">Full name</div><div class="p-field-val" id="prof-card-name" style="margin-bottom:10px;">Rajesh Karki</div>
-        <div class="p-field-lbl">Username</div><div class="p-field-val">@rajesh_ktm</div>
+        <div class="p-field-lbl">Username</div><div class="p-field-val" id="prof-card-tag">@rajesh_ktm</div>
       </div>
-      <button type="button" class="edit-btn2" onclick="showOverlay('personal-overlay')">Edit Profile</button>
+      <button type="button" class="edit-btn2" onclick="openProfileEditFlow()">Edit Profile</button>
     </div>
     <div class="invite-row clickable" onclick="inviteFriends()">
       <div class="invite-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-      <div class="invite-t"><div class="it">Invite friends</div><div class="is">Get Rs 100 per referral</div></div>
+      <div class="invite-t"><div class="it">Invite Friends</div><div class="is">Get Rs 100 per referral</div></div>
       <div class="inv-chev"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
     </div>
-    <div class="p-sec-lbl">@rajesh_ktm settings</div>
+    <div class="p-sec-lbl" id="prof-settings-label">@rajesh_ktm Settings</div>
     <div class="p-settings-card">
       <div class="prow" onclick="showOverlay('personal-overlay')"><div class="prow-ic"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="prow-lbl">Personal</span><div class="prow-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
       <div class="prow" onclick="showOverlay('banks-overlay')"><div class="prow-ic"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><span class="prow-lbl">Linked Banks</span><div class="prow-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
@@ -535,7 +730,130 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
         </div>
       </div>
     </div>
-    <div class="logout-row clickable" onclick="showToast('Demo: you stay signed in.')"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log Out</span></div>
+    <div class="logout-row clickable" onclick="openDirectSignOutConfirm()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log Out</span></div>
+  </div>
+</div>
+
+<div class="account-confirm" id="direct-signout-confirm" onclick="closeDirectSignOutConfirm()">
+  <div class="account-confirm-card" onclick="event.stopPropagation()">
+    <div class="account-confirm-title">Are you sure?</div>
+    <div class="account-confirm-actions">
+      <button type="button" onclick="closeDirectSignOutConfirm()">Cancel</button>
+      <button type="button" onclick="confirmSignOut()">Sign Out</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACCOUNT / SIGN OUT -->
+<div class="overlay account-overlay" id="account-overlay">
+  <div class="account-wrap">
+    <div class="sb"><span>9:41</span><span></span><span></span></div>
+    <div class="account-head"><h2>Your Account</h2><button class="account-close" type="button" onclick="closeAccountOverlay()">×</button></div>
+    <div class="account-list">
+      <div class="account-row"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span class="lbl">Favorites</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2 20a7 7 0 0 1 14 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20a6 6 0 0 1 7 0"/></svg><span class="lbl">Family</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="20"/><path d="M8 20V9l4-5 4 5v11"/></svg><span class="lbl">Limits</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg><span class="lbl">Linked Apps &amp; Businesses</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="lbl">Notifications</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><span class="lbl">Themes</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/></svg><span class="lbl">Documents</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="account-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="lbl">Support</span><svg class="chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+    <div class="account-signout-wrap">
+      <div class="account-signout" onclick="openSignOutConfirm()">Sign Out</div>
+    </div>
+    <div class="account-footer">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p>Your balance is insured through our partner bank under applicable rules.</p>
+    </div>
+  </div>
+  <div class="account-confirm" id="account-confirm" onclick="closeSignOutConfirm()">
+    <div class="account-confirm-card" onclick="event.stopPropagation()">
+      <div class="account-confirm-title">Are you sure?</div>
+      <div class="account-confirm-actions">
+        <button type="button" onclick="closeSignOutConfirm()">Cancel</button>
+        <button type="button" onclick="confirmSignOut()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE EDIT FLOW -->
+<div class="overlay profile-edit-flow" id="profile-edit-flow">
+  <div class="pef-wrap">
+    <div class="sb"><span>9:41</span><span></span><span></span></div>
+    <div class="pef-head">
+      <button class="pef-icon-btn" type="button" onclick="closeProfileEditFlow()">‹</button>
+      <h2>Edit Profile</h2>
+      <button class="pef-icon-btn" type="button" onclick="closeProfileEditFlow()">×</button>
+    </div>
+    <div class="pef-seg">
+      <button type="button" id="pef-tab-edit" class="active" onclick="setProfileEditTab('edit')">Edit</button>
+      <button type="button" id="pef-tab-preview" onclick="setProfileEditTab('preview')">Preview</button>
+    </div>
+    <div class="pef-body" id="pef-body-edit">
+      <div class="pef-sec-sub" style="text-align:center;margin-bottom:8px;">Customize how your MeroPay identity appears to others.</div>
+      <button type="button" class="pef-avatar" onclick="openProfilePhotoSheet()">
+        <span id="pef-avatar-initials">RK</span>
+        <span class="pef-avatar-edit">✎</span>
+      </button>
+      <div class="pef-sec-title">Basic Info</div>
+      <div class="pef-sec-sub">Information below will appear on your MeroPay profile</div>
+      <div class="pef-row" onclick="openProfileNameEditor()">
+        <div class="pef-row-lbl">Full Name</div>
+        <div class="pef-row-val"><span id="pef-name-value">Rajesh Karki</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="pef-row" onclick="openProfileTagEditor()">
+        <div class="pef-row-lbl">Username</div>
+        <div class="pef-row-val"><span id="pef-tag-value">@rajesh_ktm</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="pef-switch">Switch to a Business Account</div>
+    </div>
+    <div class="pef-body" id="pef-body-preview" style="display:none;">
+      <div class="pef-avatar"><span id="pef-preview-avatar">RK</span></div>
+      <div class="pef-preview-name" id="pef-preview-name">Rajesh Karki</div>
+      <div class="pef-preview-tag" id="pef-preview-tag">@rajesh_ktm</div>
+      <div class="pef-preview-actions">
+        <button type="button" class="req">Request</button>
+        <button type="button" class="pay">Pay</button>
+      </div>
+      <div class="pef-preview-fav">☆ Add to Favorites</div>
+      <div class="pef-preview-joined"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/></svg>Joined Jun 2023</div>
+      <div class="pef-preview-foot">Visitors will also see payment history with you.</div>
+    </div>
+  </div>
+</div>
+<div class="pef-sheet" id="profile-photo-sheet" onclick="closeProfilePhotoSheet()">
+  <div class="pef-sheet-card" onclick="event.stopPropagation()">
+    <button type="button" class="pef-sheet-item" onclick="applyPhotoAction('remove')">Remove Photo</button>
+    <button type="button" class="pef-sheet-item" onclick="applyPhotoAction('choose')">Choose New Photo</button>
+    <button type="button" class="pef-sheet-item" onclick="applyPhotoAction('take')">Take New Photo</button>
+    <button type="button" class="pef-sheet-item cancel" onclick="closeProfilePhotoSheet()">Cancel</button>
+  </div>
+</div>
+<div class="pef-modal" id="profile-name-modal">
+  <div class="sb"><span>9:41</span><span></span><span></span></div>
+  <div class="pef-modal-head"><button type="button" onclick="closeProfileNameEditor()">×</button></div>
+  <div class="pef-modal-body">
+    <h3>Enter your first and last name</h3>
+    <p>This should be your real name so people know who they're paying.</p>
+    <input id="profile-name-input" class="pef-input" type="text" maxlength="40" autocomplete="name" />
+    <div class="pef-helper">You have 2 name changes remaining</div>
+    <button type="button" class="pef-save" onclick="saveProfileName()">Save</button>
+  </div>
+</div>
+<div class="pef-modal" id="profile-tag-modal">
+  <div class="sb"><span>9:41</span><span></span><span></span></div>
+  <div class="pef-modal-head"><button type="button" onclick="closeProfileTagEditor()">×</button></div>
+  <div class="pef-modal-body">
+    <h3>Set Your Username</h3>
+    <p>Your unique @username for getting paid by anyone</p>
+    <div class="pef-input-wrap">
+      <span class="pef-prefix">@</span>
+      <input id="profile-tag-input" class="pef-input has-prefix" type="text" maxlength="20" autocomplete="off" />
+    </div>
+    <p id="profile-tag-preview" style="margin-top:4px;">meropay.np/@rajesh_ktm</p>
+    <button type="button" class="pef-save" onclick="saveProfileTag()">Set</button>
   </div>
 </div>
 
@@ -579,23 +897,23 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
       <div class="person-name" id="person-name"></div>
       <div class="person-tag" id="person-tag"></div>
       <div class="person-facts">
-        <div class="person-fact"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span id="person-joined">Joined recently</span></div>
-        <div class="person-fact"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span>Not paid by people you know</span></div>
-        <div class="person-fact"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span>Contacts not synced</span></div>
+        <div class="person-fact"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span id="person-joined">Joined Recently</span></div>
+        <div class="person-fact"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span>Not Paid by People You Know</span></div>
+        <div class="person-fact"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg><span>Contacts Not Synced</span></div>
       </div>
     </div>
     <div class="person-divider"></div>
     <div class="person-sec-title">Your history</div>
     <div class="person-total-count" id="person-total-count">0</div>
-    <div class="person-total-label">Total transactions</div>
+    <div class="person-total-label">Total Transactions</div>
     <div class="person-totals">
       <div class="person-total-col">
         <div class="amt" id="person-total-received">Rs 0</div>
-        <div class="lbl">Total received</div>
+        <div class="lbl">Total Received</div>
       </div>
       <div class="person-total-col right">
         <div class="amt" id="person-total-sent">Rs 0</div>
-        <div class="lbl">Total sent</div>
+        <div class="lbl">Total Sent</div>
       </div>
     </div>
     <div class="person-bar"><div class="person-bar-fill" id="person-bar-fill" style="width:0%;"></div></div>
@@ -615,8 +933,8 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
     <button type="button" class="ic" onclick="showToast('Messages with pay requests — coming soon.')" aria-label="Messages"><svg viewBox="0 0 24 24"><path d="M21 10.5a8.38 8.38 0 0 1-.9 3.8A8.5 8.5 0 0 1 7.5 21L3 22l1-4.5A8.38 8.38 0 0 1 3.5 13"/></svg></button>
   </div>
   <div class="seg-ctrl"><button class="seg-btn active" id="seg-scan" onclick="switchQRTab('scan')">Scan</button><button class="seg-btn" id="seg-share" onclick="switchQRTab('share')">Receive</button></div>
-  <div class="qr-scan-tab show" id="qr-scan-tab"><div class="qr-tab-title">Scan to pay</div><div class="viewfinder"><div class="scan-line"></div></div><div class="scan-hint">Hold steady until the code is recognised</div></div>
-  <div class="qr-share-tab" id="qr-share-tab"><div class="share-name" id="qr-share-name">Rajesh Karki</div><div class="share-tag">@rajesh_ktm</div><div class="qr-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas><div class="qr-logo"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div></div></div>
+  <div class="qr-scan-tab show" id="qr-scan-tab"><div class="qr-tab-title">Scan to pay</div><div class="viewfinder"><div class="scan-line"></div></div><div class="scan-hint">Hold steady until the code is recognised</div><div class="scan-dev"><input id="qr-scan-input" type="text" placeholder="Paste QR URL: https://app.meropay.com/pay/@coffee_shop?amount=500" /><button type="button" onclick="simulateScanFromInput()">Scan</button></div></div>
+  <div class="qr-share-tab" id="qr-share-tab"><div class="share-name" id="qr-share-name">Rajesh Karki</div><div class="share-tag" id="qr-share-tag">@rajesh_ktm</div><div class="qr-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas><div class="qr-logo"><img src="Logo/App%20logo.jpg" alt="MeroPay logo" /></div></div></div>
 </div>
 
 <!-- QUICK TOP-UP -->
@@ -804,12 +1122,12 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
     <div class="sup-search clickable" onclick="showToast('Search help articles — type a topic.')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Example: "PIN reset"</span></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="color:var(--text);font-size:20px;font-weight:700;">Transactions</span><div class="sup-show-more clickable" onclick="showToast('More help topics loading…')"><span style="color:var(--muted);font-size:14px;">Show more</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
     <div style="color:var(--muted);font-size:14px;margin-bottom:12px;">Get help with your transactions</div>
-    <div class="act-item" onclick="openTxnDetail(0)" style="padding:10px 0;"><div class="act-av" style="background:#fdeaee;color:#DC143C;">SP</div><div class="act-det"><div class="act-nm">Sita Pandey</div><div class="act-sub">Dinner split · 2h ago</div></div><div class="act-amt">Rs 850</div></div>
+    <div class="act-item" onclick="openTxnDetail(0)" style="padding:10px 0;"><div class="act-av" style="background:#fdeaee;color:#DC143C;">SP</div><div class="act-det"><div class="act-nm">Sita Pandey</div><div class="act-sub">Dinner split · 2h ago</div></div><div class="act-amt">- Rs 850</div></div>
     <div class="act-item" onclick="openTxnDetail(1)" style="padding:10px 0;"><div class="act-av" style="background:#e6edf9;color:#003893;">BR</div><div class="act-det"><div class="act-nm">Bikram Rana</div><div class="act-sub">Rent share · Yesterday</div></div><div class="act-amt">+ Rs 5,000</div></div>
-    <div class="act-item" onclick="openTxnDetail(2)" style="padding:10px 0;"><div class="act-av" style="background:#f0fdf4;color:#16a34a;">AM</div><div class="act-det"><div class="act-nm">Anu Magar</div><div class="act-sub">Movie tickets · Apr 15</div></div><div class="act-amt">Rs 1,200</div></div>
+    <div class="act-item" onclick="openTxnDetail(2)" style="padding:10px 0;"><div class="act-av" style="background:#f0fdf4;color:#16a34a;">AM</div><div class="act-det"><div class="act-nm">Anu Magar</div><div class="act-sub">Movie tickets · Apr 15</div></div><div class="act-amt">- Rs 1,200</div></div>
     <div class="ov-divider" style="margin:16px 0;"></div>
     <div style="color:var(--text);font-size:20px;font-weight:700;margin-bottom:14px;">Browse categories</div>
-    <div class="ov-row clickable" onclick="hideOverlay('support-overlay');showOverlay('personal-overlay');"><svg class="oi" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="ov-row-body"><div class="orl">Account &amp; settings</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="ov-row clickable" onclick="hideOverlay('support-overlay');showOverlay('personal-overlay');"><svg class="oi" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="ov-row-body"><div class="orl">Account &amp; Settings</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
     <div class="ov-row clickable" onclick="showStub('Payments & transfers','Limits, fees, and international transfers.')"><svg class="oi" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><div class="ov-row-body"><div class="orl">Payments &amp; transfers</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
     <div class="ov-row clickable" onclick="hideOverlay('support-overlay');showOverlay('security-overlay');" style="border-bottom:none;"><svg class="oi" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div class="ov-row-body"><div class="orl">Security &amp; identity</div></div><div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
   </div>
@@ -819,7 +1137,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
   <div class="withdraw-sheet" onclick="event.stopPropagation();">
     <div class="wd-handle" aria-hidden="true"></div>
     <div class="wd-title">Withdraw</div>
-    <div class="wd-available" id="wd-available-line">Rs 45,280 available</div>
+    <div class="wd-available" id="wd-available-line">Rs 45,280 AVAILABLE</div>
     <div class="wd-amt-row">
       <span class="wd-amt-prefix" aria-hidden="true">Rs</span>
       <input type="text" class="wd-amt-input" id="wd-amount-input" inputmode="numeric" autocomplete="off" aria-label="Withdrawal amount in rupees" placeholder="0" oninput="onWithdrawAmountInput(event)" />
@@ -872,6 +1190,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 <script>
 let profileLegalName='Rajesh Karki';
 let profileAddress='Baneshwor, Kathmandu, 44600';
+let profileTag='@rajesh_ktm';
 let editProfileMode=null;
 
 function initialsFromName(name){
@@ -886,9 +1205,22 @@ function syncLegalNameAcrossProfile(){
   document.getElementById('prof-card-name').textContent=profileLegalName;
   document.getElementById('qr-share-name').textContent=profileLegalName;
   document.getElementById('prof-av-initials').textContent=initialsFromName(profileLegalName);
+  document.getElementById('pef-name-value').textContent=profileLegalName;
+  document.getElementById('pef-preview-name').textContent=profileLegalName;
+  document.getElementById('pef-avatar-initials').textContent=initialsFromName(profileLegalName);
+  document.getElementById('pef-preview-avatar').textContent=initialsFromName(profileLegalName);
 }
 function syncAddressDisplay(){
   document.getElementById('personal-address-display').textContent=profileAddress;
+}
+function syncTagAcrossProfile(){
+  document.getElementById('prof-header-tag').textContent=profileTag;
+  document.getElementById('prof-card-tag').textContent=profileTag;
+  document.getElementById('qr-share-tag').textContent=profileTag;
+  document.getElementById('prof-settings-label').textContent=profileTag+' Settings';
+  document.getElementById('pef-preview-tag').textContent=profileTag;
+  document.getElementById('pef-tag-value').textContent='@'+profileTag.replace(/^@/,'');
+  document.getElementById('profile-tag-preview').textContent='meropay.np/@'+profileTag.replace(/^@/,'');
 }
 function openEditProfile(mode){
   editProfileMode=mode;
@@ -923,6 +1255,77 @@ function saveEditProfile(){
   }
   closeEditProfile();
 }
+function setProfileEditTab(tab){
+  const edit=tab==='edit';
+  document.getElementById('pef-tab-edit').classList.toggle('active',edit);
+  document.getElementById('pef-tab-preview').classList.toggle('active',!edit);
+  document.getElementById('pef-body-edit').style.display=edit?'block':'none';
+  document.getElementById('pef-body-preview').style.display=edit?'none':'block';
+}
+function openProfileEditFlow(){
+  setProfileEditTab('edit');
+  showOverlay('profile-edit-flow');
+}
+function closeProfileEditFlow(){
+  hideOverlay('profile-edit-flow');
+  closeProfilePhotoSheet();
+  closeProfileNameEditor();
+  closeProfileTagEditor();
+}
+function openProfilePhotoSheet(){
+  document.getElementById('profile-photo-sheet').classList.add('show');
+}
+function closeProfilePhotoSheet(){
+  document.getElementById('profile-photo-sheet').classList.remove('show');
+}
+function applyPhotoAction(action){
+  closeProfilePhotoSheet();
+  if(action==='remove')showToast('Profile photo removed (demo).');
+  if(action==='choose')showToast('Choose from gallery (demo).');
+  if(action==='take')showToast('Open camera (demo).');
+}
+function openProfileNameEditor(){
+  document.getElementById('profile-name-input').value=profileLegalName;
+  document.getElementById('profile-name-modal').classList.add('show');
+  setTimeout(()=>document.getElementById('profile-name-input').focus(),80);
+}
+function closeProfileNameEditor(){
+  document.getElementById('profile-name-modal').classList.remove('show');
+}
+function saveProfileName(){
+  const v=document.getElementById('profile-name-input').value.trim();
+  if(!v)return;
+  profileLegalName=v;
+  syncLegalNameAcrossProfile();
+  closeProfileNameEditor();
+  showToast('Name updated');
+}
+function openProfileTagEditor(){
+  document.getElementById('profile-tag-input').value=profileTag.replace(/^@/,'');
+  document.getElementById('profile-tag-modal').classList.add('show');
+  updateProfileTagPreview();
+  setTimeout(()=>document.getElementById('profile-tag-input').focus(),80);
+}
+function closeProfileTagEditor(){
+  document.getElementById('profile-tag-modal').classList.remove('show');
+}
+function saveProfileTag(){
+  const raw=document.getElementById('profile-tag-input').value.trim().toLowerCase();
+  const clean=raw.replace(/[^a-z0-9_]/g,'');
+  if(clean.length<3){
+    showToast('Username must be at least 3 characters');
+    return;
+  }
+  profileTag='@'+clean;
+  syncTagAcrossProfile();
+  closeProfileTagEditor();
+  showToast('Username updated');
+}
+function updateProfileTagPreview(){
+  const raw=document.getElementById('profile-tag-input').value.trim().toLowerCase();
+  const clean=raw.replace(/[^a-z0-9_]/g,'');
+  document.getElementById('profile-tag-preview').textContent='meropay.np/@'+(clean||profileTag.replace(/^@/,''));
+}
 
 const txns=[
   {dir:'out',tag:'@sita_pkr',name:'Sita Pandey',initials:'SP',bg:'#fdeaee',color:'#DC143C',note:'Dinner split',amt:850,time:'Today at 2:10 PM',group:'Today'},
@@ -934,6 +1337,122 @@ const txns=[
 ];
 let payStr='';
 let moneyFlowMode='request';
+let lockedPayAmountFromQr=null;
+const API_BASE_URL='http://localhost:3000';
+const currentUserId='u_rajesh';
+let onbStep=0;
+let onbPhone='';
+let onbCode='';
+let onbUseEmail=false;
+function isAuthenticated(){
+  return localStorage.getItem('meropay_auth')==='signed_in';
+}
+function openAuthSignIn(){
+  window.location.href='/auth.html#/auth/sign-in';
+}
+function syncAuthGate(){
+  const gate=document.getElementById('auth-gate');
+  if(!gate)return;
+  gate.classList.toggle('show',!isAuthenticated());
+}
+function onbSetStep(step){
+  onbStep=step;
+  document.querySelectorAll('.onb-step').forEach((el,idx)=>el.classList.toggle('show',idx===step));
+}
+function onbDigit(d){
+  if(onbUseEmail)return;
+  if(onbPhone.length>=10)return;
+  onbPhone+=d;
+  document.getElementById('onb-phone').value=onbPhone;
+  document.getElementById('onb-phone-next').disabled=onbPhone.length<10;
+}
+function onbBackspace(){
+  if(onbUseEmail)return;
+  onbPhone=onbPhone.slice(0,-1);
+  document.getElementById('onb-phone').value=onbPhone;
+  document.getElementById('onb-phone-next').disabled=onbPhone.length<10;
+}
+function onbContactInput(){
+  if(!onbUseEmail)return;
+  const v=(document.getElementById('onb-phone').value||'').trim();
+  document.getElementById('onb-phone-next').disabled=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+function onbToggleUseEmail(){
+  onbUseEmail=!onbUseEmail;
+  const step=document.getElementById('onb-step-1');
+  const input=document.getElementById('onb-phone');
+  const prefix=document.getElementById('onb-prefix');
+  const btn=document.getElementById('onb-toggle-email');
+  if(onbUseEmail){
+    if(step)step.classList.add('onb-email-mode');
+    if(prefix)prefix.classList.add('onb-hidden');
+    input.readOnly=false;
+    input.value='';
+    input.placeholder='Email';
+    input.type='email';
+    if(btn)btn.textContent='Use Phone';
+    document.getElementById('onb-phone-next').disabled=true;
+    input.focus();
+  }else{
+    if(step)step.classList.remove('onb-email-mode');
+    if(prefix)prefix.classList.remove('onb-hidden');
+    input.readOnly=true;
+    input.type='text';
+    input.value=onbPhone;
+    input.placeholder='Phone Number';
+    if(btn)btn.textContent='Use Email';
+    document.getElementById('onb-phone-next').disabled=onbPhone.length<10;
+  }
+}
+function onbNextFromPhone(){
+  if(onbUseEmail){
+    const email=(document.getElementById('onb-phone').value||'').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return;
+    document.getElementById('onb-phone-display').textContent=email;
+    onbSetStep(2);
+    return;
+  }
+  if(onbPhone.length<10)return;
+  document.getElementById('onb-phone-display').textContent=onbPhone;
+  onbSetStep(2);
+}
+function onbCodeDigit(d){
+  if(onbCode.length>=6)return;
+  onbCode+=d;
+  document.getElementById('onb-code').value=onbCode;
+  document.getElementById('onb-code-next').disabled=onbCode.length<6;
+}
+function onbCodeBackspace(){
+  onbCode=onbCode.slice(0,-1);
+  document.getElementById('onb-code').value=onbCode;
+  document.getElementById('onb-code-next').disabled=onbCode.length<6;
+}
+function onbShowSuccess(){
+  if(onbCode.length<6)return;
+  onbSetStep(3);
+  setTimeout(()=>onbComplete(),1100);
+}
+function onbClose(){
+  onbComplete();
+}
+function onbComplete(){
+  localStorage.setItem('meropay_onboarded','yes');
+  const wrap=document.getElementById('onb-wrap');
+  if(wrap)wrap.classList.remove('show');
+}
+function onbInit(){
+  const wrap=document.getElementById('onb-wrap');
+  if(!wrap)return;
+  if(localStorage.getItem('meropay_onboarded')==='yes'){
+    wrap.classList.remove('show');
+    return;
+  }
+  wrap.classList.add('show');
+  onbSetStep(0);
+  setTimeout(()=>{
+    if(wrap.classList.contains('show'))onbSetStep(1);
+  },1000);
+}
 let currentTxnIdx=-1;
 let personProfileName='';
 let personProfileTag='';
@@ -947,6 +1466,21 @@ function navigate(p){
 }
 function showOverlay(id){document.getElementById(id).classList.add('show');}
 function hideOverlay(id){document.getElementById(id).classList.remove('show');}
+function openAccountOverlay(){showOverlay('account-overlay');}
+function closeAccountOverlay(){hideOverlay('account-overlay');closeSignOutConfirm();}
+function openSignOutConfirm(){document.getElementById('account-confirm').classList.add('show');}
+function closeSignOutConfirm(){document.getElementById('account-confirm').classList.remove('show');}
+function openDirectSignOutConfirm(){document.getElementById('direct-signout-confirm').classList.add('show');}
+function closeDirectSignOutConfirm(){document.getElementById('direct-signout-confirm').classList.remove('show');}
+function confirmSignOut(){
+  localStorage.removeItem('meropay_auth');
+  localStorage.removeItem('meropay_onboarded');
+  closeSignOutConfirm();
+  closeDirectSignOutConfirm();
+  closeAccountOverlay();
+  onbInit();
+  showToast('Signed out');
+}
 
 let toastTimer=null;
 function showToast(msg,t){
@@ -986,7 +1520,7 @@ function openPersonProfileByName(name){
   document.getElementById('person-av').style.color=top.color;
   document.getElementById('person-name').textContent=top.name;
   document.getElementById('person-tag').textContent=personProfileTag;
-  document.getElementById('person-joined').textContent='Joined '+(top.group==='Today'?'this year':'Nov 2025');
+  document.getElementById('person-joined').textContent='Joined '+(top.group==='Today'?'This Year':'Nov 2025');
   document.getElementById('person-total-count').textContent=String(personTxns.length);
   document.getElementById('person-total-received').textContent=formatNPRWhole(received);
   document.getElementById('person-total-sent').textContent=formatNPRWhole(sent);
@@ -994,7 +1528,7 @@ function openPersonProfileByName(name){
   document.getElementById('person-bar-fill').style.width=barPct+'%';
   let listHtml='';
   personTxns.forEach(t=>{
-    listHtml+=`<div class="act-item" onclick="openTxnDetail(${txns.indexOf(t)});closePersonProfile();"><div class="act-av" style="background:${t.bg};color:${t.color};">${t.initials}</div><div class="act-det"><div class="act-nm">${t.name}</div><div class="act-sub">${t.note}<br>${t.time}</div></div><div class="act-amt">${t.dir==='in'?'+ ':''}Rs ${t.amt.toLocaleString()}</div></div>`;
+    listHtml+=`<div class="act-item" onclick="openTxnDetail(${txns.indexOf(t)});closePersonProfile();"><div class="act-av" style="background:${t.bg};color:${t.color};">${t.initials}</div><div class="act-det"><div class="act-nm">${t.name}</div><div class="act-sub">${t.note}<br>${t.time}</div></div><div class="act-amt">${t.dir==='in'?'+ ':'- '}Rs ${t.amt.toLocaleString()}</div></div>`;
   });
   document.getElementById('person-list').innerHTML=listHtml;
   closeTxnDetail();
@@ -1123,8 +1657,14 @@ let addcashInputSuppress=false;
 
 function updateHomeBalanceDisplay(){
   const el=document.getElementById('bal-amt');
+  const eye=document.getElementById('bal-eye-icon');
   if(!el)return;
-  el.textContent=balanceHidden?'••••••':formatNPRWhole(walletBalanceNum);
+  el.textContent=balanceHidden?'Rs ••••••':formatNPRWhole(walletBalanceNum);
+  if(eye){
+    eye.innerHTML=balanceHidden
+      ?'<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/>'
+      :'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
 }
 function clampAddCashAmount(raw){
   const n=Math.round(Number(raw)||0);
@@ -1196,9 +1736,8 @@ function toggleBalanceHidden(){
   balanceHidden=!balanceHidden;
   updateHomeBalanceDisplay();
 }
-function quickPayTo(first){
-  navigate('pay');
-  showToast('Send to '+first+' — enter an amount on the Send tab');
+function quickPayTo(name){
+  openPersonProfileByName(name);
 }
 function shareProfileLink(){
   const url='https://meropay.np/@rajesh_ktm';
@@ -1209,8 +1748,8 @@ function shareProfileLink(){
 function inviteFriends(){
   const url='https://meropay.np/invite/rajesh_ktm';
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(url).then(()=>showToast('Invite link copied')).catch(()=>showStub('Invite friends',url));
-  }else showStub('Invite friends',url);
+    navigator.clipboard.writeText(url).then(()=>showToast('Invite link copied')).catch(()=>showStub('Invite Friends',url));
+  }else showStub('Invite Friends',url);
 }
 let securityLockOn=false;
 function toggleSecurityLockRow(){
@@ -1219,10 +1758,21 @@ function toggleSecurityLockRow(){
   if(el){el.textContent=securityLockOn?'On':'Off';showToast('Security lock '+el.textContent);}
 }
 
-function numPress(k){if(k==='.'&&payStr.includes('.'))return;if(payStr.length>9)return;payStr+=k;document.getElementById('pay-display').textContent='Rs '+(payStr||'0');}
-function numDel(){payStr=payStr.slice(0,-1);document.getElementById('pay-display').textContent='Rs '+(payStr||'0');}
+function numPress(k){
+  if(lockedPayAmountFromQr!==null){showToast('Amount locked by merchant QR');return;}
+  if(k==='.'&&payStr.includes('.'))return;
+  if(payStr.length>9)return;
+  payStr+=k;
+  renderPayDisplay();
+}
+function numDel(){
+  if(lockedPayAmountFromQr!==null){showToast('Amount locked by merchant QR');return;}
+  payStr=payStr.slice(0,-1);
+  renderPayDisplay();
+}
 function openMoneyFlow(mode){
   moneyFlowMode=mode;
+  if(mode!=='pay')lockedPayAmountFromQr=null;
   const amt=parseFloat(payStr)||0;
   const disp=document.getElementById('req-amt-display');
   if(disp)disp.textContent=formatNPRWhole(amt);
@@ -1241,12 +1791,20 @@ function fillMoneyFlowTo(v){
   const ti=document.getElementById('req-to-input');
   if(ti){ti.value=v;ti.focus();}
 }
-function confirmMoneyFlow(){
+async function confirmMoneyFlow(){
   const amt=parseFloat(payStr)||0;
   const toTrim=(document.getElementById('req-to-input').value||'').trim();
   const note=(document.getElementById('req-note-input').value||'').trim();
   if(amt<=0){showToast('Enter an amount on the keypad first');return;}
   if(!toTrim){showToast(moneyFlowMode==='pay'?'Add who you’re paying':'Add who you’re requesting from');return;}
+  if(moneyFlowMode==='pay'){
+    const ok=await executePayment({
+      senderId:currentUserId,
+      receiverUsername:toTrim,
+      amount:Math.round(amt)
+    });
+    if(!ok)return;
+  }
   closeMoneyFlow();
   if(moneyFlowMode==='pay'){
     document.getElementById('s-title').textContent='Sent '+formatNPRWhole(amt);
@@ -1257,7 +1815,80 @@ function confirmMoneyFlow(){
   }
   document.getElementById('suc-overlay').classList.add('show');
 }
-function resetPay(){payStr='';document.getElementById('pay-display').textContent='Rs 0';document.getElementById('suc-overlay').classList.remove('show');document.getElementById('money-flow-overlay').classList.remove('show');}
+function resetPay(){payStr='';lockedPayAmountFromQr=null;renderPayDisplay();document.getElementById('suc-overlay').classList.remove('show');document.getElementById('money-flow-overlay').classList.remove('show');}
+async function executePayment(payload){
+  try{
+    const response=await fetch(`${API_BASE_URL}/api/transfer`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const data=await response.json();
+    if(!response.ok||!data.success){
+      showToast(data.message||'Payment failed');
+      return false;
+    }
+    walletBalanceNum=data.balances.sender;
+    updateHomeBalanceDisplay();
+    showToast('Payment successful');
+    return true;
+  }catch(_err){
+    showToast('Backend unavailable. Start server with npm run server');
+    return false;
+  }
+}
+function handleScan(decodedUrl){
+  try{
+    const url=new URL(decodedUrl);
+    const pathParts=url.pathname.split('/').filter(Boolean);
+    if(pathParts[0]!=='pay'||!pathParts[1]){
+      showToast('Unsupported QR format');
+      return;
+    }
+    const targetUser=decodeURIComponent(pathParts[1]);
+    const amountParam=url.searchParams.get('amount');
+    const lockedAmount=amountParam?parseInt(amountParam,10):0;
+    if(amountParam&&(!Number.isFinite(lockedAmount)||lockedAmount<=0)){
+      showToast('Invalid amount in QR');
+      return;
+    }
+
+    lockedPayAmountFromQr=amountParam?lockedAmount:null;
+    payStr=lockedPayAmountFromQr?String(lockedPayAmountFromQr):'';
+    renderPayDisplay();
+    navigate('pay');
+    openMoneyFlow('pay');
+    fillMoneyFlowTo(targetUser.startsWith('@')?targetUser:`@${targetUser}`);
+    showToast(lockedPayAmountFromQr?`Merchant amount locked: Rs ${lockedPayAmountFromQr}`:'Enter amount to continue');
+  }catch(_err){
+    showToast('Invalid QR URL');
+  }
+}
+function simulateScanFromInput(){
+  const el=document.getElementById('qr-scan-input');
+  const raw=(el&&el.value?el.value:'').trim();
+  if(!raw){
+    showToast('Paste a QR URL first');
+    return;
+  }
+  handleScan(raw);
+}
+function renderPayDisplay(){
+  const el=document.getElementById('pay-display');
+  if(!el)return;
+  const raw=(payStr||'0').replace(/[^\d.]/g,'');
+  const val=raw===''?'0':raw;
+  const parts=val.split('.');
+  const intPart=(parts[0]||'0').replace(/^0+(?=\d)/,'');
+  const safeInt=intPart===''?'0':intPart;
+  const decPart=(parts[1]||'').slice(0,2);
+  const digitCount=safeInt.length+(decPart?decPart.length:0);
+  el.classList.remove('keypad-medium','keypad-small');
+  if(digitCount>=7)el.classList.add('keypad-small');
+  else if(digitCount>=4)el.classList.add('keypad-medium');
+  const decimalHtml=decPart!==''?`<span class="pay-big-decimal">.${decPart}</span>`:'';
+  el.innerHTML=`<span class="pay-big-currency">Rs</span><span class="pay-big-main">${safeInt}</span>${decimalHtml}`;
+}
 
 function openTxnDetail(idx){
   currentTxnIdx=idx;
@@ -1266,7 +1897,7 @@ function openTxnDetail(idx){
   document.getElementById('td-name').textContent=t.name;
   document.getElementById('td-meta').textContent=t.time;
   document.getElementById('td-note2').textContent=t.note;
-  document.getElementById('td-amt2').textContent=(t.dir==='in'?'+ ':'')+'Rs '+t.amt.toLocaleString();
+  document.getElementById('td-amt2').textContent=(t.dir==='in'?'+ ':'- ')+'Rs '+t.amt.toLocaleString();
   document.getElementById('td-status').textContent=t.dir==='out'?'Payment sent successfully':'Payment received';
   document.getElementById('td-src-lbl').textContent=t.dir==='out'?'Payment source':'Depositing to';
   document.getElementById('td-between').innerHTML=t.dir==='out'?`To: ${t.name}<br>From: ${profileLegalName}`:`From: ${t.name}<br>To: ${profileLegalName}`;
@@ -1282,12 +1913,60 @@ function renderAct(){
   const order=['Today','This Week','Earlier'];const groups={};
   txns.forEach(t=>{if(!groups[t.group])groups[t.group]=[];groups[t.group].push(t);});
   let html='';
-  order.forEach(g=>{if(!groups[g])return;html+=`<div class="act-grp">${g}</div>`;groups[g].forEach(t=>{html+=`<div class="act-item" onclick="openTxnDetail(${txns.indexOf(t)})"><div class="act-av" style="background:${t.bg};color:${t.color};">${t.initials}</div><div class="act-det"><div class="act-nm">${t.name}</div><div class="act-sub">${t.tag} · ${t.time}</div></div><div class="act-amt">${t.dir==='in'?'+ ':''}Rs ${t.amt.toLocaleString()}</div></div>`;});});
+  order.forEach(g=>{if(!groups[g])return;html+=`<div class="act-grp">${g}</div>`;groups[g].forEach(t=>{html+=`<div class="act-item" onclick="openTxnDetail(${txns.indexOf(t)})"><div class="act-av" style="background:${t.bg};color:${t.color};">${t.initials}</div><div class="act-det"><div class="act-nm">${t.name}</div><div class="act-sub">${t.tag} · ${t.time}</div></div><div class="act-amt">${t.dir==='in'?'+ ':'- '}Rs ${t.amt.toLocaleString()}</div></div>`;});});
   document.getElementById('act-body').innerHTML=html;
 }
 
 function switchQRTab(tab){document.getElementById('qr-scan-tab').classList.toggle('show',tab==='scan');document.getElementById('qr-share-tab').classList.toggle('show',tab==='share');document.getElementById('seg-scan').classList.toggle('active',tab==='scan');document.getElementById('seg-share').classList.toggle('active',tab==='share');if(tab==='share')drawQR();}
-function drawQR(){const canvas=document.getElementById('qrCanvas');if(!canvas)return;const ctx=canvas.getContext('2d');const s=240,cells=25,cs=s/cells;ctx.fillStyle='white';ctx.fillRect(0,0,s,s);const df=(x,y)=>{ctx.fillStyle='black';ctx.fillRect(x*cs,y*cs,7*cs,7*cs);ctx.fillStyle='white';ctx.fillRect((x+1)*cs,(y+1)*cs,5*cs,5*cs);ctx.fillStyle='black';ctx.fillRect((x+2)*cs,(y+2)*cs,3*cs,3*cs);};df(0,0);df(18,0);df(0,18);let seed=42;const rand=()=>{seed=(seed*1664525+1013904223)&0x7fffffff;return seed/0x7fffffff;};ctx.fillStyle='black';for(let i=0;i<cells;i++){for(let j=0;j<cells;j++){if((i<8&&j<8)||(i>16&&j<8)||(i<8&&j>16))continue;if(rand()>0.5)ctx.fillRect(i*cs,j*cs,cs,cs);}}}
+function drawQR(){
+  const canvas=document.getElementById('qrCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const s=240,cells=25,cs=s/cells;
+
+  const rr=(x,y,w,h,r,fill)=>{
+    const rad=Math.max(0,Math.min(r,Math.min(w,h)/2));
+    ctx.beginPath();
+    ctx.moveTo(x+rad,y);
+    ctx.arcTo(x+w,y,x+w,y+h,rad);
+    ctx.arcTo(x+w,y+h,x,y+h,rad);
+    ctx.arcTo(x,y+h,x,y,rad);
+    ctx.arcTo(x,y,x+w,y,rad);
+    ctx.closePath();
+    if(fill)ctx.fill();
+  };
+
+  ctx.fillStyle='white';
+  ctx.fillRect(0,0,s,s);
+
+  const drawFinder=(x,y)=>{
+    const px=x*cs,py=y*cs;
+    ctx.fillStyle='black';
+    rr(px,py,7*cs,7*cs,1.6*cs,true);
+    ctx.fillStyle='white';
+    rr(px+cs,py+cs,5*cs,5*cs,1.1*cs,true);
+    ctx.fillStyle='black';
+    rr(px+2*cs,py+2*cs,3*cs,3*cs,0.8*cs,true);
+  };
+
+  drawFinder(0,0);
+  drawFinder(18,0);
+  drawFinder(0,18);
+
+  let seed=42;
+  const rand=()=>{seed=(seed*1664525+1013904223)&0x7fffffff;return seed/0x7fffffff;};
+  ctx.fillStyle='black';
+
+  for(let i=0;i<cells;i++){
+    for(let j=0;j<cells;j++){
+      if((i<8&&j<8)||(i>16&&j<8)||(i<8&&j>16))continue;
+      if(rand()>0.5){
+        const m=cs*0.09;
+        rr(i*cs+m,j*cs+m,cs-2*m,cs-2*m,cs*0.28,true);
+      }
+    }
+  }
+}
 
 const ID_TYPES={
   national_id:{
@@ -1391,6 +2070,11 @@ function setTheme(t){
   if(t==='red') phone.classList.add('theme-red');
   ['light','dark','red'].forEach(x=>document.getElementById('tt-'+x).classList.toggle('active',x===t));
 }
+document.getElementById('profile-tag-input').addEventListener('input',updateProfileTagPreview);
+syncLegalNameAcrossProfile();
+syncTagAcrossProfile();
+onbInit();
+renderPayDisplay();
 </script>
 </body>
 </html>

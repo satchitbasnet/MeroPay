@@ -47,7 +47,17 @@ function Invoke-AutoSync {
     Write-Log "git commit skipped/failed (possibly no staged changes)."
     return
   }
-  Write-Log "Auto-commit complete."
+  Write-Log "Auto-commit complete. Pushing..."
+
+  & git -C $repo push -u origin HEAD
+  if ($LASTEXITCODE -ne 0) {
+    & git -C $repo push origin HEAD
+  }
+  if ($LASTEXITCODE -eq 0) {
+    Write-Log "Auto-push complete."
+  } else {
+    Write-Log "Push failed. Will retry on next change."
+  }
 }
 
 $watcher = New-Object System.IO.FileSystemWatcher
@@ -78,7 +88,7 @@ $evtCreated = Register-ObjectEvent -InputObject $watcher -EventName Created -Act
 $evtDeleted = Register-ObjectEvent -InputObject $watcher -EventName Deleted -Action $onChange
 $evtRenamed = Register-ObjectEvent -InputObject $watcher -EventName Renamed -Action $onChange
 
-Write-Log "Auto git commit started for: $repo"
+Write-Log "Auto git sync started for: $repo"
 Write-Log "Debounce: $DebounceSeconds seconds"
 Write-Log "Press Ctrl+C to stop."
 

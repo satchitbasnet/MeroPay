@@ -5,11 +5,29 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server/index.js",
     "build": "vite build",
     "preview": "vite preview",
-    "auto:sync": "powershell -ExecutionPolicy Bypass -File \"./scripts/auto-git-sync.ps1\" -RepoPath \".\" -DebounceSeconds 45"
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "auto:sync": "powershell -ExecutionPolicy Bypass -File \"./scripts/auto-git-sync.ps1\" -RepoPath \".\" -DebounceSeconds 45",
+    "android:sync": "npm run build && npx cap sync android",
+    "android:open": "npx cap open android"
   },
   "devDependencies": {
+    "prisma": "^6.11.1",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.1",
+    "@capacitor/cli": "^8.3.1",
+    "@capacitor/core": "^8.3.1",
+    "@neondatabase/neon-js": "^0.2.0-beta.1",
+    "@prisma/client": "^6.11.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.14.2"
   }
 }

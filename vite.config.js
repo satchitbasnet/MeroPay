@@ -6,4 +6,12 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
+  build: {
+    rollupOptions: {
+      input: {
+        app: 'index.html',
+        auth: 'auth.html',
+      },
+    },
+  },
 });
