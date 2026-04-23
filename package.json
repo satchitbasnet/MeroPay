@@ -1,0 +1,15 @@
+{
+  "name": "meropay",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "auto:sync": "powershell -ExecutionPolicy Bypass -File \"./scripts/auto-git-sync.ps1\" -RepoPath \".\" -DebounceSeconds 45"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
