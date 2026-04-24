@@ -29,7 +29,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
   --text:#fff;--muted:rgba(255,255,255,0.45);--border:rgba(255,255,255,0.1);
   --red:#DC143C;--prof-bg:#f5f6fa;--prof-text:#1a1a1a;--prof-muted:#6b7280;
   --prof-card:#fff;--prof-border:rgba(0,0,0,0.07);
-  --accent:#6366f1;--accent-soft:rgba(99,102,241,0.12);--accent-ink:#3730a3;
+  --accent:#DC143C;--accent-soft:rgba(220,20,60,0.14);--accent-ink:#9f1239;
   --pay-bg1:#1e1b4b;--pay-bg2:#312e81;--pay-surface:rgba(255,255,255,0.08);
 }
 .phone.theme-dark{
@@ -207,7 +207,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 
 .note-inp{width:100%;background:var(--card);border:none;border-radius:12px;padding:12px 14px;font-size:14px;color:var(--text);outline:none;margin-bottom:12px;}
 .note-inp::placeholder{color:var(--muted);}
-.cfm-btn{width:100%;padding:15px;border-radius:16px;background:linear-gradient(135deg,var(--accent) 0%,#7c3aed 100%);border:none;color:white;font-size:16px;font-weight:700;cursor:pointer;}
+.cfm-btn{width:100%;padding:15px;border-radius:16px;background:linear-gradient(135deg,var(--accent) 0%,#b01034 100%);border:none;color:white;font-size:16px;font-weight:700;cursor:pointer;}
 .suc-ov{position:absolute;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:25;text-align:center;}
 .suc-ov.show{display:flex;}
 .suc-ov-inner{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px 24px;min-height:0;box-sizing:border-box;}
@@ -491,9 +491,9 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .wd-amt-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;padding:0 8px;}
 .wd-amt-prefix{font-size:var(--font-input-xl);font-weight:800;color:var(--accent);line-height:1;flex-shrink:0;}
 .wd-amt-input{flex:1 1 auto;min-width:72px;max-width:min(90vw,280px);font-size:var(--font-display-xl);font-weight:800;color:var(--accent);border:none;background:transparent;outline:none;font-family:inherit;letter-spacing:-1.5px;line-height:1.1;text-align:center;}
-.wd-amt-input::placeholder{color:rgba(99,102,241,0.35);}
+.wd-amt-input::placeholder{color:rgba(220,20,60,0.35);}
 .wd-slider{width:100%;height:10px;-webkit-appearance:none;appearance:none;background:rgba(0,0,0,0.08);border-radius:6px;outline:none;margin-bottom:20px;}
-.wd-slider::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#9333ea);cursor:pointer;box-shadow:0 4px 14px rgba(99,102,241,0.45);}
+.wd-slider::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#b01034);cursor:pointer;box-shadow:0 4px 14px rgba(220,20,60,0.45);}
 .wd-slider::-moz-range-thumb{width:28px;height:28px;border:none;border-radius:50%;background:linear-gradient(135deg,var(--accent),#9333ea);cursor:pointer;}
 .wd-opt{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:14px;border:1.5px solid var(--prof-border);margin-bottom:10px;cursor:pointer;background:var(--prof-card);gap:12px;}
 .wd-opt.sel{border-color:var(--red);background:rgba(220,20,60,0.07);}
@@ -513,7 +513,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
 .addcash-amt-row{margin-bottom:16px;}
 .addcash-amt-row .wd-amt-input{font-size:32px;max-width:min(90vw,240px);}
 .addcash-amt-row .wd-amt-prefix{font-size:28px;}
-.addcash-add-btn{width:100%;padding:17px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--accent) 0%,#7c3aed 100%);color:#fff;font-size:17px;font-weight:800;cursor:pointer;margin-bottom:10px;font-family:inherit;}
+.addcash-add-btn{width:100%;padding:17px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--accent) 0%,#b01034 100%);color:#fff;font-size:17px;font-weight:800;cursor:pointer;margin-bottom:10px;font-family:inherit;}
 .addcash-add-btn:active{filter:brightness(0.95);}
 .addcash-link{width:100%;padding:12px;border:none;background:none;color:var(--prof-muted);font-size:14px;font-weight:600;cursor:pointer;margin-bottom:4px;font-family:inherit;text-decoration:underline;text-underline-offset:3px;}
 #app-toast{position:absolute;left:14px;right:14px;bottom:82px;background:var(--card);color:var(--text);padding:14px 16px;border-radius:14px;font-size:14px;text-align:center;line-height:1.4;box-shadow:0 8px 32px rgba(0,0,0,0.35);opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:65;border:0.5px solid var(--border);}
@@ -704,7 +704,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
     <div class="p-card">
       <div class="p-card-inner">
         <div class="p-field-lbl">Full name</div><div class="p-field-val" id="prof-card-name" style="margin-bottom:10px;">Rajesh Karki</div>
-        <div class="p-field-lbl">Username</div><div class="p-field-val" id="prof-card-tag">@rajesh_ktm</div>
+        <div class="p-field-lbl">MeroTag</div><div class="p-field-val" id="prof-card-tag">@rajesh_ktm</div>
       </div>
       <button type="button" class="edit-btn2" onclick="openProfileEditFlow()">Edit Profile</button>
     </div>
@@ -807,7 +807,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
         <div class="pef-row-val"><span id="pef-name-value">Rajesh Karki</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="pef-row" onclick="openProfileTagEditor()">
-        <div class="pef-row-lbl">Username</div>
+        <div class="pef-row-lbl">MeroTag</div>
         <div class="pef-row-val"><span id="pef-tag-value">@rajesh_ktm</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="pef-switch">Switch to a Business Account</div>
@@ -849,8 +849,8 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
   <div class="sb"><span>9:41</span><span></span><span></span></div>
   <div class="pef-modal-head"><button type="button" onclick="closeProfileTagEditor()">×</button></div>
   <div class="pef-modal-body">
-    <h3>Set Your Username</h3>
-    <p>Your unique @username for getting paid by anyone</p>
+    <h3>Set Your MeroTag</h3>
+    <p>Your unique @MeroTag for getting paid by anyone</p>
     <div class="pef-input-wrap">
       <span class="pef-prefix">@</span>
       <input id="profile-tag-input" class="pef-input has-prefix" type="text" maxlength="20" autocomplete="off" />
@@ -936,8 +936,8 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
     <button type="button" class="ic" onclick="showToast('Messages with pay requests — coming soon.')" aria-label="Messages"><svg viewBox="0 0 24 24"><path d="M21 10.5a8.38 8.38 0 0 1-.9 3.8A8.5 8.5 0 0 1 7.5 21L3 22l1-4.5A8.38 8.38 0 0 1 3.5 13"/></svg></button>
   </div>
   <div class="seg-ctrl"><button class="seg-btn active" id="seg-scan" onclick="switchQRTab('scan')">Scan</button><button class="seg-btn" id="seg-share" onclick="switchQRTab('share')">Receive</button></div>
-  <div class="qr-scan-tab show" id="qr-scan-tab"><div class="qr-tab-title">Scan to Pay</div><div class="viewfinder"><div class="scan-line"></div></div><div class="scan-hint">Hold Steady Until the Code Is Recognized</div><div class="scan-dev"><input id="qr-scan-input" type="text" placeholder="Paste QR URL: https://app.meropay.com/pay/@coffee_shop?amount=500" /><button type="button" onclick="simulateScanFromInput()">Scan</button></div></div>
-  <div class="qr-share-tab" id="qr-share-tab"><div class="share-name" id="qr-share-name">Rajesh Karki</div><div class="share-tag" id="qr-share-tag">@rajesh_ktm</div><div class="qr-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas><div class="qr-logo"><img src="Logo/App%20logo.jpg" alt="MeroPay logo" /></div></div></div>
+  <div class="qr-scan-tab show" id="qr-scan-tab"><div class="qr-tab-title">Scan to Pay</div><div class="viewfinder"><div class="scan-line"></div></div><div class="scan-hint">Hold Steady Until the Code Is Recognized</div><div class="scan-dev"><input id="qr-scan-input" type="text" placeholder="Paste secure QR URL: https://app.meropay.com/pay?t=..." /><button type="button" onclick="simulateScanFromInput()">Scan</button></div></div>
+  <div class="qr-share-tab" id="qr-share-tab"><div class="share-name" id="qr-share-name">Rajesh Karki</div><div class="share-tag" id="qr-share-tag">@rajesh_ktm</div><div class="qr-wrap"><canvas id="qrCanvas" width="240" height="240"></canvas><div class="qr-logo"><img src="Logo/App%20logo.jpg" alt="MeroPay logo" /></div></div><div class="scan-dev"><input id="qr-share-url" type="text" readonly placeholder="Secure payment link will appear here" /><button type="button" onclick="copySecureQrLink()">Copy</button></div></div>
 </div>
 
 <!-- QUICK TOP-UP -->
@@ -1011,7 +1011,7 @@ body{background:#222;display:flex;justify-content:center;padding:16px 0;min-heig
       <div class="ov-row-body"><div class="orl">Payment requests</div><div class="ors">Allow others to request money from you.</div></div>
       <div class="ov-row-right"><span class="ov-val">Anyone</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
     </div>
-    <div class="ov-row clickable" onclick="showStub('How others find you','Search by phone, @username, or QR.')">
+    <div class="ov-row clickable" onclick="showStub('How others find you','Search by phone, @MeroTag, or QR.')">
       <svg class="oi" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <div class="ov-row-body"><div class="orl">How others find you</div><div class="ors">Choose how people can search for you on MeroPay.</div></div>
       <div class="ov-row-right"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -1316,13 +1316,13 @@ function saveProfileTag(){
   const raw=document.getElementById('profile-tag-input').value.trim().toLowerCase();
   const clean=raw.replace(/[^a-z0-9_]/g,'');
   if(clean.length<3){
-    showToast('Username must be at least 3 characters');
+    showToast('MeroTag must be at least 3 characters');
     return;
   }
   profileTag='@'+clean;
   syncTagAcrossProfile();
   closeProfileTagEditor();
-  showToast('Username updated');
+  showToast('MeroTag updated');
 }
 function startProfilePreviewMoneyFlow(mode){
   closeProfileEditFlow();
@@ -1352,6 +1352,8 @@ let moneyFlowMode='request';
 let lockedPayAmountFromQr=null;
 const API_BASE_URL='http://localhost:3000';
 const currentUserId='u_rajesh';
+let authToken='';
+let latestShareQrUrl='';
 let onbStep=0;
 let onbPhone='';
 let onbCode='';
@@ -1811,7 +1813,6 @@ async function confirmMoneyFlow(){
   if(!toTrim){showToast(moneyFlowMode==='pay'?'Add who you’re paying':'Add who you’re requesting from');return;}
   if(moneyFlowMode==='pay'){
     const ok=await executePayment({
-      senderId:currentUserId,
       receiverUsername:toTrim,
       amount:Math.round(amt)
     });
@@ -1830,9 +1831,14 @@ async function confirmMoneyFlow(){
 function resetPay(){payStr='';lockedPayAmountFromQr=null;renderPayDisplay();document.getElementById('suc-overlay').classList.remove('show');document.getElementById('money-flow-overlay').classList.remove('show');}
 async function executePayment(payload){
   try{
+    if(!await ensureAuthToken())return false;
     const response=await fetch(`${API_BASE_URL}/api/transfer`,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${authToken}`,
+        'Idempotency-Key':cryptoRandomId()
+      },
       body:JSON.stringify(payload)
     });
     const data=await response.json();
@@ -1849,28 +1855,35 @@ async function executePayment(payload){
     return false;
   }
 }
-function handleScan(decodedUrl){
+async function handleScan(decodedUrl){
   try{
+    if(!await ensureAuthToken())return;
     const url=new URL(decodedUrl);
-    const pathParts=url.pathname.split('/').filter(Boolean);
-    if(pathParts[0]!=='pay'||!pathParts[1]){
+    const token=url.searchParams.get('t');
+    if(!token){
       showToast('Unsupported QR format');
       return;
     }
-    const targetUser=decodeURIComponent(pathParts[1]);
-    const amountParam=url.searchParams.get('amount');
-    const lockedAmount=amountParam?parseInt(amountParam,10):0;
-    if(amountParam&&(!Number.isFinite(lockedAmount)||lockedAmount<=0)){
-      showToast('Invalid amount in QR');
+    const response=await fetch(`${API_BASE_URL}/api/qr/verify`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${authToken}`
+      },
+      body:JSON.stringify({token})
+    });
+    const data=await response.json();
+    if(!response.ok||!data.success){
+      showToast(data?.error?.message||'QR verification failed');
       return;
     }
-
-    lockedPayAmountFromQr=amountParam?lockedAmount:null;
+    const intent=data.intent||{};
+    lockedPayAmountFromQr=Number.isInteger(intent.amount)?intent.amount:null;
     payStr=lockedPayAmountFromQr?String(lockedPayAmountFromQr):'';
     renderPayDisplay();
     navigate('pay');
     openMoneyFlow('pay');
-    fillMoneyFlowTo(targetUser.startsWith('@')?targetUser:`@${targetUser}`);
+    fillMoneyFlowTo(intent.merchantUsername||'');
     showToast(lockedPayAmountFromQr?`Merchant amount locked: Rs ${lockedPayAmountFromQr}`:'Enter amount to continue');
   }catch(_err){
     showToast('Invalid QR URL');
@@ -1884,6 +1897,66 @@ function simulateScanFromInput(){
     return;
   }
   handleScan(raw);
+}
+function cryptoRandomId(){
+  if(window.crypto&&window.crypto.randomUUID)return window.crypto.randomUUID();
+  return `id_${Date.now()}_${Math.random().toString(36).slice(2,10)}`;
+}
+async function ensureAuthToken(){
+  if(authToken)return true;
+  try{
+    const response=await fetch(`${API_BASE_URL}/api/auth/dev-token`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({userId:currentUserId})
+    });
+    const data=await response.json();
+    if(!response.ok||!data.success||!data.token){
+      showToast('Unable to authenticate payment session');
+      return false;
+    }
+    authToken=data.token;
+    return true;
+  }catch(_err){
+    showToast('Backend unavailable. Start server with npm run server');
+    return false;
+  }
+}
+async function refreshSecureQr(){
+  if(!await ensureAuthToken())return;
+  const output=document.getElementById('qr-share-url');
+  if(output)output.value='Generating secure QR...';
+  try{
+    const response=await fetch(`${API_BASE_URL}/api/qr/create`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${authToken}`
+      },
+      body:JSON.stringify({})
+    });
+    const data=await response.json();
+    if(!response.ok||!data.success){
+      throw new Error(data?.error?.message||'Failed to generate QR');
+    }
+    latestShareQrUrl=data.qrUrl;
+    if(output)output.value=latestShareQrUrl;
+  }catch(_err){
+    latestShareQrUrl='';
+    if(output)output.value='';
+    showToast('Failed to generate secure QR');
+  }
+}
+function copySecureQrLink(){
+  if(!latestShareQrUrl){
+    showToast('Generate QR first');
+    return;
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(latestShareQrUrl).then(()=>showToast('Secure QR link copied')).catch(()=>showToast(latestShareQrUrl));
+  }else{
+    showToast(latestShareQrUrl);
+  }
 }
 function renderPayDisplay(){
   const el=document.getElementById('pay-display');
@@ -1929,7 +2002,7 @@ function renderAct(){
   document.getElementById('act-body').innerHTML=html;
 }
 
-function switchQRTab(tab){document.getElementById('qr-scan-tab').classList.toggle('show',tab==='scan');document.getElementById('qr-share-tab').classList.toggle('show',tab==='share');document.getElementById('seg-scan').classList.toggle('active',tab==='scan');document.getElementById('seg-share').classList.toggle('active',tab==='share');if(tab==='share')drawQR();}
+function switchQRTab(tab){document.getElementById('qr-scan-tab').classList.toggle('show',tab==='scan');document.getElementById('qr-share-tab').classList.toggle('show',tab==='share');document.getElementById('seg-scan').classList.toggle('active',tab==='scan');document.getElementById('seg-share').classList.toggle('active',tab==='share');if(tab==='share'){drawQR();refreshSecureQr();}}
 function drawQR(){
   const canvas=document.getElementById('qrCanvas');
   if(!canvas)return;

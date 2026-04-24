@@ -21,12 +21,11 @@ The frontend runs on Vite and the payment API runs on Express at `http://localho
 
 ## QR Payment Flow (Local)
 
-Use the Scan tab and paste URLs like:
+QR payments use signed tokens. In Receive, the app requests a secure QR URL from backend (`POST /api/qr/create`). In Scan, paste the secure URL:
 
-- `https://app.meropay.com/pay/@sita_pkr`
-- `https://app.meropay.com/pay/@coffee_shop?amount=500`
+- `https://app.meropay.com/pay?t=<signed_token>`
 
-The app parses the URL, pre-fills payee/amount, and calls `POST /api/transfer`.
+The app verifies the token with `POST /api/qr/verify`, then pre-fills payee/amount from the verified intent and submits payment to `POST /api/transfer`.
 
 ## Build
 
@@ -47,6 +46,14 @@ npm run smoke
 
 - `npm run build`
 - backend health probe against `GET /api/health`
+
+Security smoke:
+
+```bash
+npm run security:smoke
+```
+
+This validates key security paths (auth/idempotency/QR validation) against a running backend.
 
 ## Auto Git Commit (Local)
 

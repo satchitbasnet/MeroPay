@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "smoke": "npm run build && node scripts/smoke-check.mjs",
+    "security:smoke": "node scripts/security-smoke.mjs",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "auto:sync": "powershell -ExecutionPolicy Bypass -File \"./scripts/auto-git-sync.ps1\" -RepoPath \".\" -DebounceSeconds 45",
@@ -26,7 +27,10 @@
     "@neondatabase/neon-js": "^0.2.0-beta.1",
     "@prisma/client": "^6.11.1",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.4.0",
+    "helmet": "^8.1.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.14.2"

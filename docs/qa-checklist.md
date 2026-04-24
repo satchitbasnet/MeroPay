@@ -30,14 +30,17 @@ Last updated: 2026-04-22
 - [ ] Transaction detail page labels and values render with updated casing/copy.
 
 ### QR Scan/Receive
-- [ ] Scan tab parses valid payment URLs and pre-fills receiver.
-- [ ] Merchant amount lock works when `amount` query param exists.
+- [ ] Scan tab accepts only signed QR URLs (`/pay?t=...`) and rejects unsigned URLs.
+- [ ] Invalid QR signature returns `QR_INVALID_SIGNATURE`.
+- [ ] Expired QR token returns `QR_EXPIRED`.
+- [ ] Replay of the same QR token returns `QR_REPLAY_DETECTED`.
+- [ ] Merchant amount lock works from verified QR intent payload.
 - [ ] Receive tab displays user name/tag and QR correctly.
 
 ### Profile Edit and Logout
 - [ ] Edit Profile tab switching (`Edit`/`Preview`) works without visual glitches.
-- [ ] Full Name and Username edits persist across profile and preview sections.
-- [ ] Username modal uses `@` prefix and `meropay.np/@...` preview.
+- [ ] Full Name and MeroTag edits persist across profile and preview sections.
+- [ ] MeroTag modal uses `@` prefix and `meropay.np/@...` preview.
 - [ ] Log Out opens direct confirmation modal from profile page.
 - [ ] Confirmed logout clears auth/onboarding state and returns to onboarding.
 
@@ -45,6 +48,14 @@ Last updated: 2026-04-22
 - [ ] Add Funds presets and custom amount input behave correctly.
 - [ ] Withdraw flow validates amount and updates fee/summary messaging.
 - [ ] Updated labels/casing render correctly in add-funds overlays.
+
+### Payment Security
+- [ ] `POST /api/transfer` rejects requests without bearer token (`AUTH_REQUIRED`).
+- [ ] `POST /api/transfer` rejects missing idempotency header (`IDEMPOTENCY_KEY_REQUIRED`).
+- [ ] Reusing idempotency key with same payload returns same receipt (`idempotentReplay=true`).
+- [ ] Reusing idempotency key with different payload fails (`IDEMPOTENCY_KEY_CONFLICT`).
+- [ ] CORS blocks non-allowlisted origins on API endpoints.
+- [ ] `npm run security:smoke` passes against a running backend.
 
 ## Android Parity Checks
 

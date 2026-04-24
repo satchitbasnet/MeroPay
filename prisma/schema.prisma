@@ -28,3 +28,21 @@ model Transaction {
   @@index([senderId])
   @@index([receiverId])
 }
+
+model QrNonce {
+  nonce     String   @id
+  usedAt    DateTime @default(now())
+  expiresAt DateTime
+}
+
+model IdempotencyKey {
+  key           String   @id
+  userId        String
+  requestHash   String
+  transactionId String?
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime
+
+  @@index([userId])
+  @@index([expiresAt])
+}
